@@ -25,26 +25,28 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
+            Movie info
+          </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Type1</a>
+                        <a class="dropdown-item" href="#">Type2</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Type3</a>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Unknow</a>
+                    <a class="nav-link" href="#">Theater info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">unavailable</a>
                 </li>
 
                 <li class="nav-item my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">Unknow</a>
+                    <a class="nav-link disabled" href="#">unavailable</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -114,16 +116,28 @@
             </div>
         </div>
         -->
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck">
-                <label class="form-check-label" for="gridCheck">
+        <% if(message) { %>
+            <div class="alert alert-danger" role="alert">
+                <b><%= message %></b>
+            </div>
+            <% } %>
+
+
+
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <label class="form-check-label" for="gridCheck">
               Check me out
             </label>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                <input type="button" class="btn btn-primary" onclick="location.href='/login';" value="Login" />
     </form>
+
+
 
 </body>
 

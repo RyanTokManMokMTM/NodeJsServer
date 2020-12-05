@@ -25,26 +25,28 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
+            Movie info
+          </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Type1</a>
+                        <a class="dropdown-item" href="#">Type2</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Type3</a>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Unknow</a>
+                    <a class="nav-link" href="#">Theater info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">unavailable</a>
                 </li>
 
                 <li class="nav-item my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">Unknow</a>
+                    <a class="nav-link disabled" href="#">unavailable</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -64,19 +66,29 @@
     <form action="/auth/Login" method="POST">
         <div class="form-group">
             <label for="Email">Email</label>
-            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
 
         <div class="form-group">
             <label for="Password">Password</label>
-            <input type="password" class="form-control" id="Password" placeholder="Password" name="Password">
+            <input type="password" class="form-control" id="Password" placeholder="Password" name="Password" required>
         </div>
         <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <% if(message) {%>
+            <div class="alert alert-danger" role="alert">
+                <b><%= message %></b>
+            </div>
+            <% }%>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+                </br>
+                <p class="text-muted">
+                    Do not have an account? <a href="/register" class="text-reset" class="form-check-input">Sign In</a> here .
+                </p>
     </form>
 </body>
 
