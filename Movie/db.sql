@@ -1,52 +1,105 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
---
--- Host: localhost    Database: movie
--- ------------------------------------------------------
--- Server version	8.0.21
+CREATE DATABASE Movie;
+DROP DATABASE Movie;
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+-- USER　TABLE --
+CREATE TABLE Movie.`User_info` (
+    `Uid` INT NOT NULL AUTO_INCREMENT,
+    `Email` VARCHAR(50) NOT NULL UNIQUE,
+    `Password` VARCHAR(255) NOT NULL,
+    `Bio` VARCHAR(255),
+    `FirstName`  VARCHAR(20) DEFAULT 'Guest',
+    `LastName` VARCHAR(20) DEFAULT 'User',
+    `Cash_point` INT DEFAULT '9999',
+	PRIMARY KEY(`Uid`)
+);
+DROP TABLE Movie.`User_info`;
 
---
--- Table structure for table `user`
---
+-- movie_info --
+CREATE TABLE Movie.`Movie_info`(
+	`Movie_id` INT NOT NULL AUTO_INCREMENT,
+    `Movie_name` VARCHAR(50),
+    `Movie_release_date` DATE NOT NULL,
+    `Movie_type` VARCHAR(20) NOT NULL,
+    `Movie_language` VARCHAR(20) NOT NULL,
+    `Movie_length` INT NOT NULL,
+    `Movie_actor` VARCHAR(50) NOT NULL,
+    `Movie_director` VARCHAR(50) NOT NULL,
+    `Movie_plot` VARCHAR(1000) NOT NULL,
+    `Movie_poster` VARCHAR(20) NOT NULL,
+    `Movie_trailer` VARCHAR(100)NOT NULL,
+    `Movie_restricted_level` VARCHAR(10) NOT NULL,
+    `Movie_status` VARCHAR(10) NOT NULL,
+    PRIMARY KEY(`Movie_id`)
+);
+DROP TABLE Movie.`Movie_info`;
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+-- Theater_info --
+CREATE TABLE Movie.`Theater_info`(
+	`Theater_id` INT NOT NULL AUTO_INCREMENT,	
+    `Theater_name` VARCHAR(50) NOT NULL,
+    `Theater_address` VARCHAR(50) NOT NULL,
+    `Theater_contact` VARCHAR(20) NOT NULL,
+    `Theater_open_time` TIME ,
+    `Theater_close_time` TIME ,
+    `Theater_image_src` VARCHAR(20) NOT NULL,
+    PRIMARY KEY(`Theater_id`)
+);
+DROP TABLE Movie.`Theater_info`;
 
---
--- Dumping data for table `user`
---
+-- Session_info --
+CREATE TABLE Movie.`Session_info`(
+	`Session_id` INT NOT NULL AUTO_INCREMENT,
+    `Date` DATE NOT NULL,
+    `Time` TIME NOT NULL,
+    `Theater_id` INT NOT NULL,
+    `Movie_id` INT NOT NULL,
+    `Prices` INT NOT NULL,
+    PRIMARY KEY(`Session_id`),
+    FOREIGN KEY(`Theater_id`) REFERENCES Movie2.`Theater_info`(`Theater_id`),
+    FOREIGN KEY(`Movie_id`) REFERENCES Movie2.`Movie_info`(`Movie_id`)
+);
+DROP TABLE Movie.`Session_info`;
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'jackosn@hotmail.com','$2a$08$w9rYYD9izGmCSJum82E5ved6Hj.sVcle4x6bdWWkR2geusM2Tb1CS'),(2,'123@hotmail.com','$2a$08$2XwmQUX4r/NwmvhTl70MpuehQN3pOYCDuEkuROmoqyra.VxFgRvda'),(3,'RyanTokManMokMTM@hotmail.com','$2a$08$R0MGcvHmyAAunoxqe7Rn9.WweHZ6rIFh.zCrjj2ZZH.O2bNVuY6Fy'),(4,'RyanTokManMokMTMz@hotmail.com','$2a$08$WbkX/Wc8.DgmIyxwq//9reB.299bEC13KlGc7GdSB63px8WvgEMcu');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+-- Seat_info --
+CREATE TABLE Movie.`Seat_info`(
+	`Seat_id` INT NOT NULL AUTO_INCREMENT,
+    `Session_id` INT NOT NULL,
+    `Seat_num` VARCHAR(255) NOT NULL,
+    `Seat_status` BOOL NOT NULL DEFAULT 1,
+    PRIMARY KEY(`Seat_id`),
+    FOREIGN KEY(`Session_id`) REFERENCES Movie2.`Session_info`(`Session_id`)
+);
+DROP TABLE Movie.`Seat_info`;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+-- User_ticket_record--
+CREATE TABLE Movie.`User_ticket_record`(
+	`Ticket_id` VARCHAR(10) NOT NULL ,
+    `Uid` INT NOT NULL,
+    `Session_id` INT NOT NULL,
+    `Total_prices` INT NOT NULL,
+	`Payment_type` VARCHAR(10) NOT NULL,
+	`Ticket_status` VARCHAR(10) NOT NULL,
+    PRIMARY KEY(`Ticket_id`),
+    FOREIGN KEY(`Uid`) REFERENCES Movie2.`User_info`(`Uid`),
+    FOREIGN KEY(`Session_id`) REFERENCES Movie2.`Session_info`(`Session_id`)
+);
+DROP TABLE Movie.`User_ticket_record`;
 
--- Dump completed on 2020-12-04 12:36:42
+
+
+
+INSERT INTO Movie.`Movie_info`(`Movie_id`, `Movie_name`,`Movie_release_date`,`Movie_type`, `Movie_language`,`Movie_length`,`Movie_actor`,`Movie_director`,`Movie_plot`,`Movie_poster`,`Movie_trailer`,`Movie_restricted_level`,`Movie_status`) VALUES
+(1,"Avengers: Endgame",'2019-4-22',"Action","English","181","Robert Downey Jr. ,Chris Evans , Mark Ruffalo","Anthony Russo ,Joe Russo","123","avenger-4.jpg","https://www.youtube.com/embed/TcMBFSGVi1c","16+","Hot"),
+(2,"The Nun",'2018-9-4',"Horror","English","96","Demián Bichir. ,Taissa Farmiga , Jonas Bloquet","Corin Hard","456","the-nun.jpg","https://www.youtube.com/embed/pzD9zGcUNrw","16+","Hot"),
+(3,"It",'2017-9-5',"Horror","English","135","Jaeden Martell ,Jeremy Ray Taylor , Sophia Lillis","Andy Muschietti","789","it.jpg","https://www.youtube.com/embed/FnCdOQsX5kc","16+","Hot"),
+(4,"Iron man 3",'2013-4-14',"Action","English","131","Robert Downey Jr. ,Gwyneth Paltrow ,Don Cheadle","Shane Black","abc","iron-3.jpg","https://www.youtube.com/embed/Ke1Y3P9D0Bc","16+","Hot");
+
+INSERT INTO Movie.`Theater_info`(`Theater_id`, `Theater_name`,`Theater_address`,`Theater_contact`, `Theater_open_time`,`Theater_close_time`,`Theater_image_src`) VALUES
+(1,"Horseheads, Regal Arnot Mall","3300 Chambers RdHorseheads, NY 14845","(844) 462-7342","08:00","","t1.jpg"),
+(2,"Queensbury, Regal Aviation Mall","578 Aviation Rd Queensbury, NY 12804"," (844) 462-7342","","","t2.jpg"),
+(3,"Staten Island, Regal Bricktown Charleston","165 Bricktown Way Staten Island, NY 10309","(844) 462-7342","","","t3.jpg"),
+(4,"Plattsburgh, Regal Champlain Centre","60 Smithfield Blvd, Suite 90 Plattsburgh, NY 12901"," (844) 462-7342","","","t4.jpg"),
+(5,"Syracuse, Regal Destiny USA 4DX, IMAX & RPX","9586 Destiny USA Drive Syracuse, NY 13204"," (844) 462-7342","","","t5.jpg"),
+(6,"Long Island City, Regal UA Kaufman Astoria & RPX","35-30 38th Street Long Island City, NY 11101","(844) 462-7342","","","t6.jpg"),
+(7,"Clifton Park, Regal Clifton Park & RPX","22 Clifton Country Road Clifton Park, NY 12065","(844) 462-7342","","","t7.jpg"),
+(8,"New York, Regal Essex Crossing & RPX","129 Delancey Street New York, NY 10002","(844) 462-7342","","","t8.jpg");

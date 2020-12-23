@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<% var user,movie_detail, select_info;%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/577845f6a5.js" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="/html_getmovie.js"></script>
+        </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>Movie_detail</title>
+
+    </head>
+
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Movie</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/movie">Movie info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/theater">Theater info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+
+                    <li class="nav-item my-2 my-lg-0">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <% if(user) { %>
+                                <a class="nav-link" href="/profile">User Profile <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+                                    <% } %>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <% if(user) { %>
+                                <a class="nav-link" href="/auth/signout">Sign out <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/register">Register</a>
+                                    <% } %>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+        <h1 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;padding-left: 10px;">Movie Detail Info</h1>
+
+        <form action="/info/movie_detail" method="GET" id="movie_selection" name="movie_selection">
+            <select class="custom-select" style="width:500px; margin-left: 10px;" id="movielist" name="movielist" onchange="SelectedValue()">
+                <% for(var i = 0;i<select_info.length;i++) { %>
+                <option value="<%=select_info[i].Movie_id %>"><%= select_info[i].Movie_name %></option>
+                <% } %>
+            </select>
+        </form>
+
+        <script>
+            var change = document.getElementById("movielist")
+            var index = "<%= movie_detail.Movie_id %>" - 1
+            change.options[index].setAttribute("selected", "selected");
+        </script>
+
+        <hr/>
+
+        <div class></div>
+        <div class="row">
+            <div class="col-md-2 ">
+                <div style="width: 18rem; max-width: 18rem; margin: 3%; ">
+                    <div style="width: 110%; height: 110%; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                        <img class="card-img-top " src="/movie/<%= movie_detail.Movie_poster %> " alt="Card image cap ">
+                    </div>
+                    <br/>
+                    <button type="button " class="btn btn-secondary btn-lg btn-block" style="margin-left: 5%; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ">Get the ticket</button>
+                </div>
+            </div>
+
+            <div class=" col-md-3 " style="padding-top: 2%; margin-left: 5%; ">
+                <div>
+                    <button type="button " class="btn btn btn-primary btn-sm " style=" box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ; "><%= movie_detail.Movie_restricted_level%></button>
+                    <button type="button " class="btn btn-danger btn-sm " style="box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); "><%= movie_detail.Movie_status%></button>
+                </div>
+                <br/>
+                <h1 style="color: coral; ">
+                    <%= movie_detail.Movie_name %>
+                </h1>
+                <br/>
+                <h5 style="font-size: medium; ">Release Date:
+                    <%= movie_detail.Movie_release_date%>
+                </h5>
+                <hr/>
+                <h3 style="color: gray; ">MOVIE INFO </h3>
+                <h3 style="color: black; font-size: medium; margin-top: 20px; ">Director: &nbsp;
+                    <%= movie_detail.Movie_director %>
+                </h3>
+                <h3 style="color: black; font-size: medium; margin-top: 20px; ">Actor: &nbsp;
+                    <%= movie_detail.Movie_actor %>
+                </h3>
+                <h3 style="color: black; font-size: medium; margin-top: 20px; ">Type: &nbsp;
+                    <%= movie_detail.Movie_type%>
+                </h3>
+                <h3 style="color: black; font-size: medium; margin-top: 20px; ">Language: &nbsp;
+                    <%= movie_detail.Movie_language%>
+                </h3>
+                <h3 style="color: black; font-size: medium; margin-top: 20px; ">Movie Time: &nbsp;
+                    <%= movie_detail.Movie_length%>&nbsp;mintues</h3>
+            </div>
+            <div class="col-md-5 " style="padding-top: 2%; ">
+                <div>
+                    <i class="fa fa-video-camera " style="font-size:large;color:black; " aria-hidden=" true ">&nbsp;<span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                        'Helvetica Neue', sans-serif; color: black; ">Movie Trailer</span></i>
+                </div>
+                <hr/>
+                <div class=" embed-responsive embed-responsive-16by9 " style="box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+                    <iframe width="560 " height="315 " src="<%=movie_detail.Movie_trailer%>" frameborder="0 " allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture " allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div style="background-color:rgba(143, 143, 143,0.1);padding-left: 10px; ">
+            <h3>Plot/About This Story</h3>
+            <br/>
+            <div style="font-size: medium; font-family: fantasy;line-height: 50px;margin: 0% 2% 0% 0%; ">
+                <%= movie_detail.Movie_plot%>
+            </div>
+        </div>
+
+    </body>
+
+
+
+</html>

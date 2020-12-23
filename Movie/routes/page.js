@@ -1,6 +1,7 @@
 const express = require("express");
-const route = express.Router();
 const authControllor = require("../Controllor/auth")
+const infoControllor = require("../Controllor/info")
+const route = express.Router();
 
 //for getting request form browser
 //Request and Response
@@ -21,7 +22,6 @@ route.get("/register", (req, res) => {
 route.get("/profile", authControllor.UserAuth, (req, res) => {
     //chenking user authorization
     if (req.user) {
-        console.log(req.user)
         res.render("profile", { user: req.user })
     } else {
         console.log("not login yet")
@@ -29,5 +29,25 @@ route.get("/profile", authControllor.UserAuth, (req, res) => {
     }
 
 })
+
+//get basic info
+
+route.get("/movie", authControllor.UserAuth, infoControllor.movie_info, (req, res) => {
+    if (req.user) {
+        res.render("movie_info", { movie: req.movie_infos, user: req.user })
+    } else {
+        res.render("movie_info", { movie: req.movie_infos })
+    }
+})
+
+route.get("/theater", infoControllor.theater, authControllor.UserAuth, (req, res) => {
+    if (req.user) {
+        res.render("theater_info", { data: req.theater, user: req.user })
+    } else {
+        res.render("theater_info", { data: req.theater })
+    }
+
+})
+
 
 module.exports = route;

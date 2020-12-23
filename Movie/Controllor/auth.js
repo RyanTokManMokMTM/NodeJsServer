@@ -21,7 +21,7 @@ exports.register = async(req, res) => {
     //count same email if 0 not exist
 
 
-    db.query("SELECT count(`email`)> 0 as exist FROM `user` WHERE `email` = ?", [Email], async(error, result) => {
+    db.query("SELECT count(`Email`)> 0 as exist FROM `user_info` WHERE `email` = ?", [Email], async(error, result) => {
         if (error) {
             consodle.log(error);
         }
@@ -49,7 +49,7 @@ exports.register = async(req, res) => {
                 const Hashpwd = await bcrypt.hash(Password, 8);
                 console.log(Hashpwd);
 
-                await db.query("INSERT INTO `user` SET ?", { email: Email, password: Hashpwd, FirstName, LastName }, (error, result) => {
+                await db.query("INSERT INTO `user_info` SET ?", { Email, Password: Hashpwd, FirstName, LastName, Bio: "Hi i'm new user." }, (error, result) => {
                     if (error) {
                         console.log(error);
                     }
@@ -87,19 +87,20 @@ exports.login = async(req, res) => {
         }
 
         //query db
-        db.query("SELECT * FROM `user` WHERE email = ?", [email], async(error, result) => {
+        db.query("SELECT * FROM `user_info` WHERE `Email` = ?", [email], async(error, result) => {
             if (error) {
                 console.log(error)
+
                 return
             }
 
             //if account is not exist or password is no correct(wait this before exit)
-            if (!result || !(await bcrypt.compare(Password, result[0].password))) {
+            if (!result || !(await bcrypt.compare(Password, result[0].Password))) {
                 return res.status(401).render("login", { message: "Email or Password is incorrect." })
                     //status 401 unauth
             } else {
                 //JWT content
-                const id = result[0].id;
+                const id = result[0].Uid;
                 const JWTObj = { id, email };
                 const user_token = jwt.sign(JWTObj, process.env.JWT_KEY, {
                     expiresIn: process.env.JWT_EXPIRED
@@ -108,7 +109,7 @@ exports.login = async(req, res) => {
                 //Setting cookie
                 const cookie_option = {
                         expires: new Date( //Cookie expired date ms
-                            Date.now() + process.env.COOKIE_EXPIRED * 24 * 60 * 60 * 1000),
+                            Date.now() + process.env.COOKIE_EXPIRED * 60 * 1000),
                         httpOnly: true, //only http can read by webserver
                         //secure  use https?
                     }
@@ -139,7 +140,7 @@ exports.UserAuth = async(req, res, next) => {
             );
 
             console.log(decodeJWT)
-            db.query("SELECT * FROM `user` WHERE id = ?", [decodeJWT.id], (error, result) => {
+            db.query("SELECT * FROM `user_info` WHERE Uid = ?", [decodeJWT.id], (error, result) => {
                 if (error) {
                     console.log(error)
                 } else {

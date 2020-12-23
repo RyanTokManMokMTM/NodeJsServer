@@ -26,20 +26,12 @@
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Movie info
-          </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Type1</a>
-                        <a class="dropdown-item" href="#">Type2</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Type3</a>
-                    </div>
-                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Theater info</a>
+                    <a class="nav-link" href="/movie">Movie info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/theater">Theater info</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">unavailable</a>
@@ -70,11 +62,13 @@
                     <img class="card-img-top" src="/avatar.png" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <%= user.LastName + user.FirstName%>
+                            <%= user.LastName +","+ user.FirstName%>
                         </h5>
-                        <p class="card-text">Hi! i am now using this system.</p>
+                        <p class="card-text">
+                            <%= user.Bio%>
+                        </p>
                         <a href="http//www.google.com" class="btn btn-primary" style="width: 100%;">
-                            <%= user.email %>
+                            <%= user.Email %>
                         </a>
                     </div>
                 </div>
@@ -87,7 +81,7 @@
                     </div>
                     <div class="card-body ">
                         <h5 class="card-title ">Hi,
-                            <%= user.LastName + user.FirstName%> welcome back</h5>
+                            <%= user.LastName +","+ user.FirstName%> welcome back</h5>
                         <p class="card-text ">You can add your bio here</p>
                         <a href="# " class="btn btn-primary ">Go somewhere</a>
                     </div>
