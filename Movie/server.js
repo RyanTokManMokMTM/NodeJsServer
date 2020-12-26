@@ -22,7 +22,7 @@ server.use(cookieParser())
 server.use("/", require("./routes/page")) // when server get with / or /xxx /xxxxe etc  will go into routes page js to match
 server.use("/auth", require("./routes/auth")) // when server get with / or /xxx /xxxxe etc  will go into routes page js to match
 server.use("/info", require("./routes/info")) // when server get with / or /xxx /xxxxe etc  will go into routes page js to match
-
+server.use("/data", require("./routes/getData"))
 
 //Server setting
 server.listen(9001, () => {

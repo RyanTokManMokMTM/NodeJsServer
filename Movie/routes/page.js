@@ -1,6 +1,7 @@
 const express = require("express");
 const authControllor = require("../Controllor/auth")
-const infoControllor = require("../Controllor/info")
+const infoControllor = require("../Controllor/info");
+const { db } = require("../db");
 const route = express.Router();
 
 //for getting request form browser
@@ -47,6 +48,20 @@ route.get("/theater", infoControllor.theater, authControllor.UserAuth, (req, res
         res.render("theater_info", { data: req.theater })
     }
 
+})
+
+route.get("/ticket", (req, res) => {
+    db.query("SELECT `Theater_id`,`Theater_name` FROM `theater_info`", [], async(error, result) => {
+        if (error) {
+            console.log("error");
+            return res.render("ticket", { theater_info: null })
+        } else {
+            //theater info got
+            return res.render("ticket", {
+                theater_info: result
+            })
+        }
+    })
 })
 
 

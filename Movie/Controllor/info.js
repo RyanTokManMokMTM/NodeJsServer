@@ -1,4 +1,5 @@
 const db = require("../db").db;
+const dateformat = require("dateformat")
 db.getConnection((error) => {
     if (error) {
         console.log(error);
@@ -39,7 +40,14 @@ exports.movie_info = (req, res, next) => {
                     return next();
                 }
                 // console.log(result)
-                req.movie_infos = result
+                var MovieList = result
+                    //  console.log(MovieList)
+                for (var i = 0; i < result.length; i++) {
+                    // console.log(result[i])
+                    var dateTemp = dateformat(result[i].Movie_release_date, "mmmm dS, yyyy")
+                    MovieList[i].Movie_release_date = dateTemp
+                }
+                req.movie_infos = MovieList
                 return next()
             }
         })
