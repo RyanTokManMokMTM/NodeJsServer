@@ -1,0 +1,11 @@
+.breadcrumb-item+.breadcrumb-item::before {
+    content: "»";
+    font-family: cursive;
+    font-size: small;
+}
+
+.breadcrumb-item {
+    color: blueviolet;
+    font-family: cursive;
+    font-size: small;
+}

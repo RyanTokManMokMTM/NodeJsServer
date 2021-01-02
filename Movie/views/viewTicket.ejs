@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<% var user,movie_info;%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/ticket.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/577845f6a5.js" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="/html_getmovie.js"></script>
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="/path/to/js.cookie.js"></script>
+        <title>Movie_detail</title>
+
+    </head>
+
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Movie</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/movie">Movie info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/theater">Theater info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+
+                    <li class="nav-item my-2 my-lg-0">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <% if(user) { %>
+                                <a class="nav-link" href="/profile">User Profile <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+                                    <% } %>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <% if(user) { %>
+                                <a class="nav-link" href="/auth/signout">Sign out <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/register">Register</a>
+                                    <% } %>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">1.Select ticket type</li>
+                <li class="breadcrumb-item active">2.Select ticket seat</li>
+                <li class="breadcrumb-item active">3.Confirm</li>
+                <li class="breadcrumb-item active">3.Succeed</li>
+            </ol>
+        </nav>
+
+        <div class="row" style=" margin: 2%;">
+            <div class="col-md-2 ">
+                <div class="card text-white bg-dark" style="width: 18rem; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img class="card-img-top" src="/movie/<%= movie_info.Movie_poster%>" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                            <%= movie_info.Date%> &nbsp;
+                                <%= movie_info.Time%>
+
+                        </p>
+                        <p class="card-text"><i class="fa fa-location-arrow" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                            <%= movie_info.theater_name%>
+                        </p>
+                        <p class=" card-text "><i class="fa fa-video-camera" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                            <%= movie_info.Movie_name%>
+                        </p>
+                        <div>
+                            <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button ">
+                                <%= movie_info.Movie_restricted_level%>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script>
+                var shopping_list = {}
+
+                function FullPriceCount() {
+                    var User_total = document.getElementById("user_total_price")
+                    var table = document.getElementById("myshoppinglist")
+                    console.log(table)
+                        //full
+                    var FullticketCount = document.getElementById("Full") // get total
+                    var Fullprice = document.getElementById("FullPrice") // get price
+                    var Fulltotal = document.getElementById("FullTotal")
+                    var FullticketPrice = Fullprice.textContent.substring(1) //remove dollarside
+                    var Full_Int_price = parseInt(FullticketPrice)
+                    var Full_Int_total = parseInt(FullticketCount.value)
+                    var Full_total_price = Full_Int_price * Full_Int_total
+                    Fulltotal.innerHTML = "$ " + Full_total_price
+
+                    if (!shopping_list.hasOwnProperty("FULL TICKET")) {
+                        //console.log(shopping_list)
+                        shopping_list["FULL TICKET"] = "FULL TICKET"
+                        var tr = document.createElement("tr")
+                        tr.id = "FULL_TICKET"
+                        var td = tr.appendChild(document.createElement("td"))
+
+                        var ticketName = document.createElement("p")
+                        var name = "FULL TICKET"
+                        var type = td.appendChild(ticketName)
+                        type.innerText = name
+
+                        var totalTicket = document.createElement("p")
+                        totalTicket.id = "FULL_TICKET_AMOUNT"
+                        totalTicket.className = "text-right"
+                        var totalamount = "X " + Full_Int_total + " = " + Full_total_price
+                        var ticketPrice = td.appendChild(totalTicket)
+                        ticketPrice.innerText = totalamount
+
+                        table.insertBefore(tr, table.childNodes[0])
+                    } else {
+                        if (Full_Int_total != 0) { //if set to 0 remove all
+                            var ticket_text = document.getElementById("FULL_TICKET_AMOUNT")
+                            var update = "X " + Full_Int_total + " = " + Full_total_price
+                            ticket_text.innerText = update
+                        } else { //if set to 0 remove all from the list
+                            var zero = document.getElementById("FULL_TICKET")
+                            zero.remove()
+                            delete shopping_list["FULL TICKET"]
+                            console.log(shopping_list)
+                        }
+                    }
+
+                    //set cookie
+                    //  console.log(typeof(Cookies.get("FT")))
+                    if (Cookies.get("FT") == undefined && Full_Int_total != 0) {
+                        var fulllist = {
+                            Count: Full_Int_total, //type of ticket
+                            Price: Full_Int_price, //total ticket
+                            total: Full_total_price
+                        }
+                        var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+
+                        Cookies.set("FT", JSON.stringify(fulllist), {
+                            expires: inFifteenMinutes,
+                            path: "/ticket",
+                        })
+                    } else {
+                        if (Full_Int_total == 0) {
+                            Cookies.remove("FT", {
+                                path: "\ticket"
+                            })
+                        } else {
+                            var updateinfo = JSON.parse(Cookies.get("FT"))
+                            Cookies.remove("FT", {
+                                path: "\ticket"
+                            })
+                            updateinfo.Count = Full_Int_total
+                            updateinfo.Price = Full_Int_price
+                            updateinfo.total = Full_total_price
+                            var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+
+                            Cookies.set("FT", JSON.stringify(updateinfo), {
+                                expires: inFifteenMinutes,
+                                path: "/ticket",
+                            })
+                        }
+                    }
+
+                    //discount
+                    var DiscountticketCount = document.getElementById("Discount")
+                    var Discountprice = document.getElementById("DiscountPrice")
+                    var Discounttotal = document.getElementById("DiscountTotal")
+                    var DiscountticketPrice = Discountprice.textContent.substring(1) // remove dollar side
+                    var Discountprice_Int_price = parseInt(DiscountticketPrice) //sub to Int
+                    var Discountprice_Int_total = parseInt(DiscountticketCount.value) // sub to Int
+                    var user_ticket_total = Full_total_price + (Discountprice_Int_price * Discountprice_Int_total)
+                    User_total.innerHTML = "Total$: " + user_ticket_total
+                }
+
+                function DiscountPriceCount() {
+                    var User_total = document.getElementById("user_total_price")
+                    var table = document.getElementById("myshoppinglist")
+                        //discount
+                    var DiscountticketCount = document.getElementById("Discount")
+                    var Discountprice = document.getElementById("DiscountPrice")
+                    var Discounttotal = document.getElementById("DiscountTotal")
+                    var DiscountticketPrice = Discountprice.textContent.substring(1) // remove dollar side
+
+                    var Discountprice_Int_price = parseInt(DiscountticketPrice) //sub to Int
+                    var Discountprice_Int_total = parseInt(DiscountticketCount.value) // sub to Int
+                    var Discount_total_price = Discountprice_Int_price * Discountprice_Int_total
+                    Discounttotal.innerHTML = "$ " + Discount_total_price
+
+                    if (!shopping_list.hasOwnProperty("DISCOUNT TICKET")) {
+                        //console.log(shopping_list)
+                        shopping_list["DISCOUNT TICKET"] = "DISCOUNT TICKET"
+                        var tr = document.createElement("tr")
+                        tr.id = "DISCOUNT_TICKET"
+                        var td = tr.appendChild(document.createElement("td"))
+
+                        var ticketName = document.createElement("p")
+                        var name = "DISCOUNT TICKET"
+                        var type = td.appendChild(ticketName)
+                        type.innerText = name
+
+                        var totalTicket = document.createElement("p")
+                        totalTicket.id = "DISCOUNT_TICKET_AMOUNT"
+                        totalTicket.className = "text-right"
+                        var totalamount = "X " + Discountprice_Int_total + " = " + Discount_total_price
+                        var ticketPrice = td.appendChild(totalTicket)
+                        ticketPrice.innerText = totalamount
+
+                        table.insertBefore(tr, table.childNodes[0])
+                    } else {
+                        if (Discountprice_Int_total != 0) { //if set to 0 remove all
+                            var ticket_text = document.getElementById("DISCOUNT_TICKET_AMOUNT")
+                            var update = "X " + Discountprice_Int_total + " = " + Discount_total_price
+                            ticket_text.innerText = update
+                        } else { //if set to 0 remove all from the list
+                            var zero = document.getElementById("DISCOUNT_TICKET")
+                            zero.remove()
+                            delete shopping_list["DISCOUNT TICKET"]
+                                //console.log(shopping_list)
+                        }
+                    }
+
+
+                    //set cookie
+                    console.log(typeof(Cookies.get("DT")))
+                    if (Cookies.get("DT") == undefined && Discountprice_Int_total != 0) {
+                        var fulllist = {
+                            Count: Discountprice_Int_total, //type of ticket
+                            Price: Discountprice_Int_price, //total ticket
+                            total: Discount_total_price
+                        }
+                        var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+
+                        Cookies.set("DT", JSON.stringify(fulllist), {
+                            expires: inFifteenMinutes,
+                            path: "/ticket",
+                        })
+                    } else {
+                        if (Full_Int_total == 0) {
+                            Cookies.remove("DT", {
+                                path: "\ticket"
+                            })
+                        } else {
+
+                            var updateinfo = JSON.parse(Cookies.get("DT"))
+                            Cookies.remove("DT", {
+                                path: "\ticket"
+                            })
+                            updateinfo.Count = Discountprice_Int_total
+                            updateinfo.Price = Discountprice_Int_price
+                            updateinfo.total = Discount_total_price
+                            var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+
+                            Cookies.set("DT", JSON.stringify(updateinfo), {
+                                expires: inFifteenMinutes,
+                                path: "/ticket",
+                            })
+                        }
+                    }
+
+                    //full
+                    var FullticketCount = document.getElementById("Full") // get total
+                    var Fullprice = document.getElementById("FullPrice") // get price
+                    var Fulltotal = document.getElementById("FullTotal")
+                    var FullticketPrice = Fullprice.textContent.substring(1) //remove dollarside
+                    var Full_Int_price = parseInt(FullticketPrice)
+                    var Full_Int_total = parseInt(FullticketCount.value)
+
+                    var user_ticket_total = Discount_total_price + (Full_Int_price * Full_Int_total)
+                    User_total.innerHTML = "Total:$ " + user_ticket_total
+                }
+            </script>
+
+            <div class=" col-md-7 " style=" margin-left: 2%; ">
+                <div class="card text-center ">
+                    <div class="card-body " style="background-color: gray; ">
+                        <h2 class="card-title ">Select Your Ticket</h2>
+                        <p class="card-text ">選擇您希望購買的電影票張數和類型.請注意系統將自動為您保留可訂的最佳座位, 每筆交易最多可購買10張電影票</p>
+                    </div>
+                </div>
+                </br>
+
+                <div>
+                    <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#ticket_type" aria-expanded="false" aria-controls="ticket_type">
+                        General ticket
+                      </button>
+                </div>
+                <div class="collapse" id="ticket_type">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ticket Type</th>
+                                <th scope="col">Ticket Price</th>
+                                <th scope="col">Ticket Quantity</th>
+                                <th scope="col">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">Full</td>
+                                <td id="FullPrice">
+                                    <%= movie_info.Prices %>
+                                </td>
+                                <td>
+                                    <form action="" method="GET ">
+                                        <select class="custom-select" style="width:100px;" id="Full" name="Full" onchange="FullPriceCount()">
+                                            <% for(var i = 0;i<=10;i++) {  %>
+                                        <option value="<%=i %>">
+                                            <%= i %>
+                                        </option>
+                                        <% } %>
+                                            </select>
+                                    </form>
+                                </td>
+                                <td id="FullTotal">$0</td>
+                            </tr>
+                            <tr>
+                                <td scope="row">Discount</td>
+                                <td id="DiscountPrice">
+                                    <%= movie_info.Prices * 0.8%>
+                                </td>
+                                <td>
+                                    <form action="" method="GET">
+                                        <select class="custom-select" style="width:100px;" id="Discount" name="Discount" onchange="DiscountPriceCount()">
+                                        <% for(var i = 0;i<=10;i++) {  %>
+                                        <option value="<%= i %>">
+                                            <%= i %>
+                                        </option>
+                                        <% } %>
+                                            </select>
+                                    </form>
+                                </td>
+                                <td id="DiscountTotal">$0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </br>
+                <div class="card text-center">
+                    <div class="card-body" style="background-color: gray; ">
+                        <h2 class="card-title">Select Vips Coupon</h2>
+                        <p class="card-text">選擇您希望購買的電影票張數和類型.請注意系統將自動為您保留可訂的最佳座位, 每筆交易最多可購買10張電影票</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 " style="padding-left: 3%; ">
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">VIP's Area</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Not Login Yet</p>
+                    </div>
+                </div>
+
+                </br>
+                </br>
+                </br>
+
+                <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">Shopping List</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody id="myshoppinglist">
+                                <tr>
+                                    <td id="user_total_price" class="text-right">
+                                        Total:$ 0
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <script>
+                function check() {
+                    var full = document.getElementById("Full")
+                    var discount = document.getElementById("Discount")
+                    var Intfull = parseInt(full.value)
+                    var IntDiscount = parseInt(discount.value)
+
+                    var total = Intfull + IntDiscount
+                    console.log(total)
+                    if (total <= 0 || total > 10) {
+                        alert("You can't order more than 10 tickets. Please try again")
+                        return false
+                    }
+                    return true;
+                }
+            </script>
+            <div style=" margin-left:80%; ">
+                <form action="/ticket/viewTicketSeat" method="GET" id="ticket_form" onsubmit="return check()">
+                    <button type="submit " class="btn btn-info btn-lg ">Contunues</button>
+                </form>
+            </div>
+
+    </body>
+
+</html>

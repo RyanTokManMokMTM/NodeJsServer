@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<% var user,movie_info,list;%>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/ticket.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://kit.fontawesome.com/577845f6a5.js" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="/html_getmovie.js"></script>
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>Movie_detail</title>
+
+    </head>
+
+
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">Movie</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/movie">Movie info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/theater">Theater info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+
+                    <li class="nav-item my-2 my-lg-0">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <% if(user) { %>
+                                <a class="nav-link" href="/profile">User Profile <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+                                    <% } %>
+                        </li>
+                        <li class="nav-item">
+
+
+                            <% if(user) { %>
+                                <a class="nav-link" href="/auth/signout">Sign out <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/register">Register</a>
+                                    <% } %>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">1.Select ticket type</li>
+                <li class="breadcrumb-item" aria-current="page">2.Select ticket seat</li>
+                <li class="breadcrumb-item active">3.Confirm</li>
+                <li class="breadcrumb-item active">3.Succeed</li>
+            </ol>
+        </nav>
+
+        <div class="row" style=" margin: 2%;">
+            <div class="col-md-2 ">
+                <div class="card text-white bg-dark" style="width: 18rem; box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img class="card-img-top" src="/movie/<%= movie_info.Movie_poster%>" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                            <%= movie_info.Date%> &nbsp;
+                                <%= movie_info.Time%>
+
+                        </p>
+                        <p class="card-text"><i class="fa fa-location-arrow" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                            <%= movie_info.theater_name%>
+                        </p>
+                        <p class=" card-text "><i class="fa fa-video-camera" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                            <%= movie_info.Movie_name%>
+                        </p>
+                        <div>
+                            <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button ">
+                                <%= movie_info.Movie_restricted_level%>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class=" col-md-7 " style=" margin-left: 2%; ">
+                <div class="card text-center ">
+                    <div class="card-body " style="background-color: gray; ">
+                        <h2 class="card-title ">Select Your Seat</h2>
+                        <p class="card-text ">選擇您希望購買的電影票張數和類型.請注意系統將自動為您保留可訂的最佳座位, 每筆交易最多可購買10張電影票</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 " style="padding-left: 3%; ">
+                <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">VIP's Area</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Not Login Yet</p>
+                    </div>
+                </div>
+
+                </br>
+                </br>
+                </br>
+
+                <script>
+                    window.onload = () => {
+                        var FT_Price = 0
+                        var DT_Price = 0
+                        var total_price = document.getElementById("user_total_price")
+
+                        '<% for(var key in list) { %>' //if having FT
+                        var table = document.getElementById("shoppinglist")
+
+                        '<% if( key == "FT") {%>'
+                        var cook = Cookies.get("FT")
+                        var FT_info = JSON.parse(cook)
+
+                        var tr = document.createElement("tr")
+                        tr.id = "FULL_TICKET"
+                        var td = tr.appendChild(document.createElement("td"))
+
+                        var ticketName = document.createElement("p")
+                        var name = "FULL TICKET"
+                        var type = td.appendChild(ticketName)
+                        type.innerText = name
+
+                        var totalTicket = document.createElement("p")
+                        totalTicket.id = "FULL_TICKET_AMOUNT"
+                        totalTicket.className = "text-right"
+                        var totalamount = "X " + FT_info["Count"] + " = " + FT_info["total"]
+                        var ticketPrice = td.appendChild(totalTicket)
+                        ticketPrice.innerText = totalamount
+                        FT_Price = FT_info["total"]
+
+                        table.insertBefore(tr, table.childNodes[0])
+                        '<% }%>'
+
+                        '<% if( key == "DT") {%>'
+                        var cook = Cookies.get("DT")
+                        var DT_info = JSON.parse(cook)
+
+                        var tr = document.createElement("tr")
+                        tr.id = "FULL_TICKET"
+                        var td = tr.appendChild(document.createElement("td"))
+
+                        var ticketName = document.createElement("p")
+                        var name = "DISCOUNT TICKET"
+                        var type = td.appendChild(ticketName)
+                        type.innerText = name
+
+                        var totalTicket = document.createElement("p")
+                        totalTicket.id = "DISCOUNT_TICKET_AMOUNT"
+                        totalTicket.className = "text-right"
+                        var totalamount = "X " + DT_info["Count"] + " = " + DT_info["total"]
+                        var ticketPrice = td.appendChild(totalTicket)
+                        ticketPrice.innerText = totalamount
+                        DT_Price = DT_info["total"]
+
+                        table.insertBefore(tr, table.childNodes[0])
+                        '<% }%>'
+                        '<% } %>'
+                        var ticket_price = FT_Price + DT_Price
+                        total_price.innerHTML = "Total$: " + ticket_price
+                    }
+                </script>
+
+
+                <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" id="123">
+                    <div class="card-header">
+                        <h5 class="card-title">Shopping List</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <tbody id="shoppinglist">
+                                <tr>
+                                    <td id="user_total_price" class="text-right">
+                                        Total:$ 0
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                function check() {
+                    var full = document.getElementById("Full")
+                    var discount = document.getElementById("Discount")
+                    var Intfull = parseInt(full.value)
+                    var IntDiscount = parseInt(discount.value)
+
+                    var total = Intfull + IntDiscount
+                    console.log(total)
+                    if (total <= 0 || total > 10) {
+                        alert("You can't order more than 10 tickets. Please try again")
+                        return false
+                    }
+                    return true;
+                }
+            </script>
+            <div style=" margin-left:80%; ">
+                <form action="/ticket/viewTicketSeat" method="GET" id="ticket_form" onsubmit="return check()">
+                    <button type="submit " class="btn btn-info btn-lg ">Pay</button>
+                </form>
+            </div>
+
+    </body>
+
+</html>
+
+</html>
+
+</html>

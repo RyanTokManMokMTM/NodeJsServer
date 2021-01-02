@@ -23,6 +23,7 @@ server.use("/", require("./routes/page")) // when server get with / or /xxx /xxx
 server.use("/auth", require("./routes/auth")) // when server get with / or /xxx /xxxxe etc  will go into routes page js to match
 server.use("/info", require("./routes/info")) // when server get with / or /xxx /xxxxe etc  will go into routes page js to match
 server.use("/data", require("./routes/getData"))
+server.use("/ticket/", require("./routes/viewticket"))
 
 //Server setting
 server.listen(9001, () => {
