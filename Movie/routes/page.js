@@ -51,18 +51,35 @@ route.get("/theater", infoControllor.theater, authControllor.UserAuth, (req, res
 
 })
 
-route.get("/ticket", (req, res) => {
-    db.query("SELECT `Theater_id`,`Theater_name` FROM `theater_info`", [], async(error, result) => {
-        if (error) {
-            console.log("error");
-            return res.render("ticket", { theater_info: null })
-        } else {
-            //theater info got
-            return res.render("ticket", {
-                theater_info: result
-            })
-        }
-    })
+route.get("/ticket", authControllor.UserAuth, (req, res) => {
+    if (req.user) {
+        db.query("SELECT `Theater_id`,`Theater_name` FROM `theater_info`", [], async(error, result) => {
+            if (error) {
+                console.log("error");
+                return res.render("ticket", { theater_info: null, user: req.user })
+            } else {
+                //theater info got
+                return res.render("ticket", {
+                    theater_info: result,
+                    user: req.user
+                })
+            }
+        })
+    } else {
+        db.query("SELECT `Theater_id`,`Theater_name` FROM `theater_info`", [], async(error, result) => {
+            if (error) {
+                console.log("error");
+                return res.render("ticket", { theater_info: null, user: null })
+            } else {
+                //theater info got
+                return res.render("ticket", {
+                    theater_info: result,
+                    user: null
+                })
+            }
+        })
+    }
+
 })
 
 

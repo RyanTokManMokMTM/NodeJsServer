@@ -49,8 +49,8 @@ DROP TABLE Movie.`Theater_info`;
 -- Session_info --
 CREATE TABLE Movie.`Session_info`(
 	`Session_id` INT NOT NULL AUTO_INCREMENT,
+	`Date` INT NOT NULL,
     `Theater_id` INT NOT NULL,
-    `Date` INT NOT NULL,
     `Movie_id` INT NOT NULL,
     `Prices` INT NOT NULL,
     PRIMARY KEY(`Session_id`),
@@ -73,27 +73,93 @@ DROP TABLE Movie.`Movie_date_info`;
 CREATE TABLE Movie.`Seat_info`(
 	`Seat_id` INT NOT NULL AUTO_INCREMENT,
     `Session_id` INT NOT NULL,
-	`Seat_row` VARCHAR(1) NOT NULL,
-    `Seat_num` INT NOT NULL,
+    `Seat_num` VARCHAR(3) NOT NULL,
     `Seat_status` BOOL NOT NULL DEFAULT 1,
     PRIMARY KEY(`Seat_id`),
-    FOREIGN KEY(`Session_id`) REFERENCES Movie2.`Session_info`(`Session_id`)
+    FOREIGN KEY(`Session_id`) REFERENCES Movie.`Session_info`(`Session_id`)
 );
 DROP TABLE Movie.`Seat_info`;
 
 -- User_ticket_record--
 CREATE TABLE Movie.`User_ticket_record`(
+	`User_ticket_ids` INT NOT NULL AUTO_INCREMENT,
 	`Ticket_id` VARCHAR(10) NOT NULL ,
     `Uid` INT NOT NULL,
     `Session_id` INT NOT NULL,
+    `Seat_id` INT NOT NULL,
     `Total_prices` INT NOT NULL,
 	`Payment_type` VARCHAR(10) NOT NULL,
 	`Ticket_status` VARCHAR(10) NOT NULL,
-    PRIMARY KEY(`Ticket_id`),
+    PRIMARY KEY(`User_ticket_ids`),
     FOREIGN KEY(`Uid`) REFERENCES Movie.`User_info`(`Uid`),
-    FOREIGN KEY(`Session_id`) REFERENCES Movie.`Session_info`(`Session_id`)
+    FOREIGN KEY(`Session_id`) REFERENCES Movie.`Session_info`(`Session_id`),
+	FOREIGN KEY(`Seat_id`) REFERENCES Movie.`Seat_info`(`Seat_id`)
 );
 DROP TABLE Movie.`User_ticket_record`;
+
+INSERT INTO Movie.`Seat_info`(`Seat_id`,`Session_id`,`Seat_num`,`Seat_status`) VALUES 
+(1,1,"A1",false),
+(2,1,"A2",false),
+(3,1,"A3",false),
+(4,1,"A4",false),
+(5,1,"A5",false),
+(6,1,"A6",false),
+(7,1,"A7",false),
+(8,1,"A8",false),
+(9,1,"A9",false),
+(10,1,"A10",true),
+(11,1,"B1",false),
+(12,1,"B2",false),
+(13,1,"B3",false),
+(14,1,"B4",true),
+(15,1,"B5",true),
+(16,1,"B6",false),
+(17,1,"B7",false),
+(18,1,"B8",false),
+(19,1,"B9",false),
+(20,1,"B10",false),
+(21,1,"C1",false),
+(22,1,"C2",false),
+(23,1,"C3",false),
+(24,1,"C4",true),
+(25,1,"C5",true),
+(26,1,"C6",false),
+(27,1,"C7",false),
+(28,1,"C8",false),
+(29,1,"C9",false),
+(30,1,"C10",false),
+(31,1,"D1",false),
+(32,1,"D2",false),
+(33,1,"D3",false),
+(34,1,"D4",true),
+(35,1,"D5",true),
+(36,1,"D6",false),
+(37,1,"D7",false),
+(38,1,"D8",false),
+(39,1,"D9",false),
+(40,1,"D10",false),
+(41,1,"E1",false),
+(42,1,"E2",false),
+(43,1,"E3",false),
+(44,1,"E4",true),
+(45,1,"E5",true),
+(46,1,"E6",false),
+(47,1,"E7",false),
+(48,1,"E8",false),
+(49,1,"E9",false),
+(50,1,"E10",false),
+(51,1,"F1",true),
+(52,1,"F2",true),
+(53,1,"F3",true),
+(54,1,"F4",true),
+(55,1,"F5",true),
+(56,1,"F6",true),
+(57,1,"F7",true),
+(58,1,"F8",true),
+(59,1,"F9",true),
+(60,1,"F10",true);
+
+
 
 INSERT INTO Movie.`Session_info`(`Session_id`, `Date`,`Theater_id`,`Movie_id`,`Prices`) VALUES
 (1,1,1,1,"200"),

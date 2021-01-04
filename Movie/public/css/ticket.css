@@ -9,3 +9,29 @@
     font-family: cursive;
     font-size: small;
 }
+
+#seat_status span {
+    padding: 2%;
+}
+
+.row {
+    display: flex;
+}
+
+.seat {
+    content: url("/seat_img/seat_status/Available.png");
+}
+
+.seat.selected {
+    content: url("/seat_img/seat_status/Yourseat.png");
+}
+
+.seat.unavailable {
+    background-attachment: red;
+    content: url("/seat_img/seat_status/Unavailable.png");
+}
+
+.seat:not(.unavailable):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<% var user,movie_info,list;%>
+<% var user,movie_info,list,seat_status;%>
 
     <head>
         <meta charset="UTF-8">
@@ -79,8 +79,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item active">1.Select ticket type</li>
                 <li class="breadcrumb-item" aria-current="page">2.Select ticket seat</li>
-                <li class="breadcrumb-item active">3.Confirm</li>
-                <li class="breadcrumb-item active">3.Succeed</li>
+                <li class="breadcrumb-item active">3.Done</li>
             </ol>
         </nav>
 
@@ -94,7 +93,7 @@
                                 <%= movie_info.Time%>
 
                         </p>
-                        <p class="card-text"><i class="fa fa-location-arrow" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                        <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
                             <%= movie_info.theater_name%>
                         </p>
                         <p class=" card-text "><i class="fa fa-video-camera" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
@@ -118,7 +117,393 @@
                         <p class="card-text ">選擇您希望購買的電影票張數和類型.請注意系統將自動為您保留可訂的最佳座位, 每筆交易最多可購買10張電影票</p>
                     </div>
                 </div>
+                </br>
+
+                </br>
+                <div id="seat_status" class="text-center">
+                    <span>
+                        <img src="/seat_img/seat_status/Available.png" alt="Available" onclick="">
+                        <span>Available</span>
+                    </span>
+                    <span>
+                        <img src="/seat_img/seat_status/YourSeat.png" alt="Your seat">
+                        <span>Your Seat</span>
+                    </span>
+                    <span>
+                        <img src="/seat_img/seat_status/Unavailable.png" alt="Unavailable">
+                        <span>Unavailable</span>
+                    </span>
+                </div>
+                </br>
+                <div class="text-center">
+                    <span>
+                        <img style="max-width: 200%;"src="/seat_img/Screen.png" alt="Screen">
+                    </span>
+                </div>
+                </br>
+                <div class="container">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Row</th>
+                                <th scope="col">1</th>
+                                <th scope="col">2</th>
+                                <th scope="col">3</th>
+                                <th scope="col">4</th>
+                                <th scope="col">5</th>
+                                <th scope="col">6</th>
+                                <th scope="col">7</th>
+                                <th scope="col">8</th>
+                                <th scope="col">9</th>
+                                <th scope="col">10</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!--RowA-->
+                            <tr>
+                                <td><span>
+                                        <img  src="/seat_img/seat_row/A.png" alt="Row_A" >
+                                    </span></td>
+                                <div class="row">
+                                    <td>
+                                        <div class="seat" id="A1">
+                                            <img src="/seat_img/seat_status/Available.png" alt="available1">
+                                        </div>
+                                    </td>
+                                    <td><span class="seat" id="A2">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available2">
+                                            </span></td>
+                                    <td><span class="seat" id="A3">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available3">
+                                            </span></td>
+                                    <td><span class="seat" id="A4">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available4">
+                                            </span></td>
+                                    <td><span class="seat" id="A5">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available5">
+                                            </span></td>
+                                    <td><span class="seat" id="A6">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available6">
+                                            </span></td>
+                                    <td><span class="seat" id="A7">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available7">
+                                            </span></td>
+                                    <td><span class="seat" id="A8">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available8">
+                                            </span></td>
+                                    <td><span class="seat" id="A9">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available9">
+                                            </span></td>
+                                    <td><span class="seat" id="A10">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available10">
+                                            </span></td>
+                                </div>
+                            </tr>
+
+                            <!--RowB-->
+                            <tr>
+                                <td><span>
+                                        <img  src="/seat_img/seat_row/B.png" alt="Row_B" >
+                                    </span></td>
+                                <div class="row">
+                                    <td>
+                                        <div class="seat" id="B1">
+                                            <img src="/seat_img/seat_status/Available.png" alt="available1">
+                                        </div>
+                                    </td>
+                                    <td><span class="seat" id="B2">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available2">
+                                            </span></td>
+                                    <td><span class="seat" id="B3">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available3">
+                                            </span></td>
+                                    <td><span class="seat" id="B4">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available4">
+                                            </span></td>
+                                    <td><span class="seat" id="B5">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available5">
+                                            </span></td>
+                                    <td><span class="seat" id="B6">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available6">
+                                            </span></td>
+                                    <td><span class="seat" id="B7">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available7">
+                                            </span></td>
+                                    <td><span class="seat" id="B8">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available8">
+                                            </span></td>
+                                    <td><span class="seat" id="B9">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available9">
+                                            </span></td>
+                                    <td><span class="seat" id="B10">
+                                                <img src="/seat_img/seat_status/Available.png" alt="available10">
+                                            </span></td>
+                                </div>
+                            </tr>
+
+                            <!--RowB-->
+                            <tr>
+                                <td><span>
+                                    <img  src="/seat_img/seat_row/C.png" alt="Row_C" >
+                                </span></td>
+                                <div class="row">
+                                    <td>
+                                        <div class="seat" id="C1">
+                                            <img src="/seat_img/seat_status/Available.png" alt="available1">
+                                        </div>
+                                    </td>
+                                    <td><span class="seat" id="C2">
+                                        <img src="/seat_img/seat_status/Available.png" alt="available2">
+                                    </span></td>
+                                    <td><span class="seat" id="C3">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available3">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C4">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available4">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C5">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available5">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C6">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available6">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C7">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available7">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C8">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available8">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C9">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available9">
+                                                                        </span></td>
+                                    <td><span class="seat" id="C10">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available10">
+                                                                        </span></td>
+                                </div>
+                            </tr>
+
+                            <!--RowD-->
+                            <tr>
+                                <td><span>
+                                        <img  src="/seat_img/seat_row/D.png" alt="Row_D" >
+                                    </span></td>
+                                <div class="row">
+                                    <td>
+                                        <div class="seat" id="D1">
+                                            <img src="/seat_img/seat_status/Available.png" alt="available1">
+                                        </div>
+                                    </td>
+                                    <td><span class="seat" id="D2">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available2">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D3">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available3">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D4">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available4">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D5">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available5">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D6">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available6">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D7">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available7">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D8">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available8">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D9">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available9">
+                                                                        </span></td>
+                                    <td><span class="seat" id="D10">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available10">
+                                                                        </span></td>
+                                </div>
+                            </tr>
+
+                            <!--RowE-->
+                            <tr>
+                                <td><span>
+                                        <img  src="/seat_img/seat_row/E.png" alt="Row_E" >
+                                    </span></td>
+                                <div class="row">
+                                    <td>
+                                        <div class="seat" id="E1">
+                                            <img src="/seat_img/seat_status/Available.png" alt="available1">
+                                        </div>
+                                    </td>
+                                    <td><span class="seat" id="E2">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available2">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E3">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available3">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E4">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available4">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E5">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available5">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E6">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available6">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E7">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available7">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E8">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available8">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E9">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available9">
+                                                                        </span></td>
+                                    <td><span class="seat" id="E10">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available10">
+                                                                        </span></td>
+                                </div>
+                            </tr>
+
+                            <!--RowF-->
+                            <tr>
+                                <td><span>
+                                        <img  src="/seat_img/seat_row/F.png" alt="Row_F" >
+                                    </span></td>
+                                <div class="row">
+                                    <td>
+                                        <div class="seat" id="F1">
+                                            <img src="/seat_img/seat_status/Available.png" alt="available1">
+                                        </div>
+                                    </td>
+                                    <td><span class="seat" id="F2">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available2">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F3">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available3">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F4">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available4">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F5">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available5">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F6">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available6">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F7">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available7">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F8">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available8">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F9">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available9">
+                                                                        </span></td>
+                                    <td><span class="seat" id="F10">
+                                                                            <img src="/seat_img/seat_status/Available.png" alt="available10">
+                                                                        </span></td>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="alert alert-primary" role="alert">
+                        You have selected <b id="user_ticket_count" class="alert-link">0</b>&nbsp;tickets seat.
+                        <div> Your seat:<b id="selected_id"></b></div>
+                    </div>
+                </div>
+
+                <script>
+                    const containers = document.querySelector(".container")
+                    const seats = document.querySelectorAll(".row .seat:not(.unavailable)")
+                    const user_note = document.getElementById("user_ticket_count")
+                    const selected_seat = document.getElementById("selected_id")
+
+                    var ticket_full = 0
+                    var ticket_discount = 0
+                    var user_seat = {}
+                        //get shopping list total ticket
+                    '<% for(var key in list) { %>' //if having FT
+                    '<% if( key == "FT") {%>'
+                    var cook = Cookies.get("FT")
+                    var FT_info = JSON.parse(cook)
+
+                    ticket_full = FT_info["Count"]
+                    '<% }%>'
+
+                    '<% if( key == "DT") {%>'
+                    var cook = Cookies.get("DT")
+                    var DT_info = JSON.parse(cook)
+
+                    ticket_discount = DT_info["Count"]
+                    '<% }%>'
+                    '<% } %>'
+                    const total = parseInt(ticket_full) + parseInt(ticket_discount)
+
+                    function ticketcount() {
+                        const selected_ticket = document.querySelectorAll(".row .selected")
+                        const count = selected_ticket.length
+                        user_note.innerHTML = count
+                            //  console.log(count)
+                    }
+                    containers.addEventListener("click", (e) => {
+                        const selected_ticket = document.querySelectorAll(".row .selected")
+                        if (e.target.classList.contains("seat") && !(e.target.classList.contains("unavailable"))) {
+                            if (selected_ticket.length < total) { //user be able to select a seat
+                                e.target.classList.toggle("selected") // toggle 
+                                var seat_id = e.target.id
+                                if (e.target.classList.contains("seat") && !e.target.classList.contains("selected")) {
+                                    delete user_seat[seat_id]
+                                } else {
+                                    user_seat[seat_id] = seat_id
+                                }
+                                //console.log(user_seat)
+                                var str = ""
+                                ticketcount()
+
+                                for (key in user_seat) {
+                                    //console.log(user_seat[key])
+                                    str += user_seat[key] + " "
+                                }
+                                // console.log(str)
+                                // console.log(selected_ticket.length)
+                                selected_seat.innerHTML = str
+                                    //console.log(selected_ticket.length)
+                            } else { //user is already selected all seat
+                                e.target.classList.toggle("selected") // toggle 
+                                var temp = document.querySelectorAll(".row .selected")
+                                if (temp.length < total) {
+                                    delete user_seat[e.target.id]
+                                } else {
+                                    var seat_id = e.target.id //get user selected seat id
+                                    var first_seat = Object.keys(user_seat)[0]
+                                    var first_seats_id = document.getElementById(first_seat)
+
+                                    if (first_seats_id.classList.contains("seat") && first_seats_id.classList.contains("selected")) { // for all seat selected case
+                                        first_seats_id.classList.toggle("selected")
+                                        delete user_seat[first_seat]
+                                        user_seat[seat_id] = seat_id
+                                    }
+                                }
+                                var str = ""
+                                console.log(user_seat)
+                                    // ticketcount()
+                                for (key in user_seat) {
+                                    //console.log(user_seat[key])
+                                    str += user_seat[key] + " "
+                                }
+
+                                selected_seat.innerHTML = str
+                                console.log("test2")
+                                ticketcount()
+                            }
+                        }
+                    })
+                </script>
             </div>
+
+
+
 
             <div class="col-md-2 " style="padding-left: 3%; ">
                 <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
@@ -136,6 +521,11 @@
 
                 <script>
                     window.onload = () => {
+                        '<%for(var i =0;i<seat_status.length;i++){%>'
+                        var temp_id = document.getElementById('<%=seat_status[i].Seat_num%>')
+                        temp_id.classList.toggle("unavailable")
+                        '<%}%>'
+
                         var FT_Price = 0
                         var DT_Price = 0
                         var total_price = document.getElementById("user_total_price")
@@ -216,31 +606,47 @@
             </div>
 
             <script>
-                function check() {
-                    var full = document.getElementById("Full")
-                    var discount = document.getElementById("Discount")
-                    var Intfull = parseInt(full.value)
-                    var IntDiscount = parseInt(discount.value)
-
-                    var total = Intfull + IntDiscount
-                    console.log(total)
-                    if (total <= 0 || total > 10) {
-                        alert("You can't order more than 10 tickets. Please try again")
-                        return false
+                function obj_length(obj) {
+                    let size = 0
+                    for (key in obj) {
+                        size++
                     }
-                    return true;
+                    return size
+                }
+
+                function checkseat() {
+                    var size = obj_length(user_seat)
+                    if (size < total) {
+                        //if user still have a seat not yet selected
+                        console.log(size)
+                        var remind = total - size
+                        var str = "You still have " + remind + " ticket that you need to select a seat"
+                        alert(str)
+                        return false
+                    } else {
+                        //all seat have selected
+                        var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+                        if (Cookies.get("seat")) {
+                            Cookies.remove("seat", {
+                                path: "/ticket"
+                            })
+
+                        }
+                        Cookies.set("seat", JSON.stringify(user_seat), {
+                            expires: inFifteenMinutes,
+                            path: "/ticket"
+                        })
+                        return true;
+                    }
+
                 }
             </script>
             <div style=" margin-left:80%; ">
-                <form action="/ticket/viewTicketSeat" method="GET" id="ticket_form" onsubmit="return check()">
+                <form action="/ticket/ViewUserTicket" method="GET" id="ticket_form" onsubmit="return checkseat()">
                     <button type="submit " class="btn btn-info btn-lg ">Pay</button>
                 </form>
             </div>
 
     </body>
-
-</html>
-
-</html>
 
 </html>

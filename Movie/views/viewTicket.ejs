@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" href="/css/ticket.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://kit.fontawesome.com/577845f6a5.js" crossorigin="anonymous">
         </script>
         <script type="text/javascript" src="/html_getmovie.js"></script>
@@ -80,8 +81,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item" aria-current="page">1.Select ticket type</li>
                 <li class="breadcrumb-item active">2.Select ticket seat</li>
-                <li class="breadcrumb-item active">3.Confirm</li>
-                <li class="breadcrumb-item active">3.Succeed</li>
+                <li class="breadcrumb-item active">3.Done</li>
             </ol>
         </nav>
 
@@ -95,7 +95,7 @@
                                 <%= movie_info.Time%>
 
                         </p>
-                        <p class="card-text"><i class="fa fa-location-arrow" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                        <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
                             <%= movie_info.theater_name%>
                         </p>
                         <p class=" card-text "><i class="fa fa-video-camera" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
@@ -113,6 +113,18 @@
 
             <script>
                 var shopping_list = {}
+                window.onload = () => {
+                    if (Cookies.get("FT")) {
+                        Cookies.remove("FT", {
+                            path: "/ticket"
+                        })
+                    }
+                    if (Cookies.get("DT")) {
+                        Cookies.remove("DT", {
+                            path: "/ticket"
+                        })
+                    }
+                }
 
                 function FullPriceCount() {
                     var User_total = document.getElementById("user_total_price")
@@ -431,7 +443,7 @@
                     <button type="submit " class="btn btn-info btn-lg ">Contunues</button>
                 </form>
             </div>
-
+        </div>
     </body>
 
 </html>

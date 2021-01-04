@@ -1,63 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+<%user;%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            <%= user.LastName +","+ user.FirstName%>
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/ticket.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/fontawesome-free-5.15.1-web/css/font-awesome.css">
+        <script src="https://kit.fontawesome.com/577845f6a5.js" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="/html_getmovie.js"></script>
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </head>
 
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Movie</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Movie</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/movie">Movie info</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/theater">Theater info</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">unavailable</a>
-                </li>
-
-                <li class="nav-item my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">unavailable</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/profile">User Profile<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/movie">Movie info</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/auth/signout">Sign out</a>
+                        <a class="nav-link" href="/theater">Theater info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">unavailable</a>
+                    </li>
+
+                    <li class="nav-item my-2 my-lg-0">
+                        <a class="nav-link disabled" href="#">unavailable</a>
                     </li>
                 </ul>
-            </form>
-        </div>
-    </nav>
-
-
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-4">
+                <form class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/profile">User Profile<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/signout">Sign out</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </nav>
+        <div class="row" style=" margin: 2%;">
+            <div class="col-md-3 ">
                 <div class="card" style="width: 100%;">
                     <img class="card-img-top" src="/avatar.png" alt="Card image cap">
                     <div class="card-body">
@@ -67,14 +80,16 @@
                         <p class="card-text">
                             <%= user.Bio%>
                         </p>
-                        <a href="http//www.google.com" class="btn btn-primary" style="width: 100%;">
+                        <a href="/profile" class="btn btn-primary" style="width: 100%;">
                             <%= user.Email %>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class=" col-8 ">
+
+            <div class=" col-md-7 " style=" margin-left: 2%; ">
+
                 <div class="card text-center ">
                     <div class="card-header ">
                         Featured
@@ -85,13 +100,173 @@
                         <p class="card-text ">You can add your bio here</p>
                         <a href="# " class="btn btn-primary ">Go somewhere</a>
                     </div>
-                    <div class="card-footer text-muted ">
-                        NODE JS PROCESSING
+
+                </div>
+                </br>
+
+                <p>
+                    <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#ticket_list" aria-expanded="false" aria-controls="ticket_list">
+                  Your Ticket List
+                </button>
+                </p>
+                <div class="collapse overflow-auto" id="ticket_list" style="max-height: 500px;">
+                    <!-- Nav tabs -->
+                    <div class="container">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#Available " role="tab" aria-controls="Available" aria-selected="true">Available</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link " id="profile-tab" data-bs-toggle="tab" href="#Watched" role="tab" aria-controls="Watched" aria-selected="false">Watched(Recent 10 records)</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="messages-tab" data-bs-toggle="tab" href="#Expired" role="tab" aria-controls="Expired" aria-selected="false">Expired(Recent 10 records)</a>
+                            </li>
+
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Available" role="tabpanel" aria-labelledby="Available-tab">
+                                <% for(var i = 0;i<10;i++){%>
+                                    <div class="card card-body" style="margin:2%;">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b></b>[ ]
+                                                </div>
+                                                <div class="card-body">
+                                                    <p>
+                                                        <span class="card-title"><i class="fa fa-video-camera" aria-hidden="true" style="font-size:15px;"></i>&nbsp;
+                                                    <span style="font-size: 20px;font-weight: bold;"> 
+                                                    </span>
+                                                        </span> &nbsp;
+                                                        <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet;">
+                                                        </a>
+                                                    </p>
+                                                    <p class="card-text"><i class="fa fa-calculator" aria-hidden="true" style="font-size:15px"></i> &nbsp;
+                                                    </p>
+                                                    <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                    </p>
+
+                                                    <p class="card-text"><i class="fas fa-location-arrow" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                    </p>
+
+                                                    <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer text-danger">
+                                                    <i class="fas fa-dollar-sign"></i>9&nbsp;
+                                                    <button type="button" class="btn btn-success btn-sm">Refund ticket</button>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                            </div>
+                            <div class="tab-pane " id="Watched" role="tabpanel" aria-labelledby="Watched-tab">
+                                <% for(var i = 0;i<10;i++){%>
+                                    <div class="card card-body" style="margin:2%;">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="card">
+                                                <div class="card-header" style="color: gray;">
+                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b></b>[ ]
+                                                </div>
+                                                <div class="card-body">
+                                                    <p>
+                                                        <span class="card-title"><i class="fa fa-video-camera" aria-hidden="true" style="font-size:15px;"></i>&nbsp;
+                                                    <span style="font-size: 20px;font-weight: bold;"> 
+                                                    </span>
+                                                        </span> &nbsp;
+                                                        <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet;">
+                                                        </a>
+                                                    </p>
+                                                    <p class="card-text"><i class="fa fa-calculator" aria-hidden="true" style="font-size:15px"></i> &nbsp;
+                                                    </p>
+                                                    <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                    </p>
+
+                                                    <p class="card-text"><i class="fas fa-location-arrow" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                    </p>
+
+                                                    <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer text-danger">
+                                                    <i class="fas fa-dollar-sign"></i>9&nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+
+                            </div>
+                            <div class="tab-pane" id="Expired" role="tabpanel" aria-labelledby="Expired-tab">
+                                <% for(var i = 0;i<10;i++){%>
+                                    <div class="card card-body" style="margin:2%;">
+                                        <div class="d-flex flex-column bd-highlight mb-3">
+                                            <div class="card">
+                                                <div class="card-header" style="color: red;">
+                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b></b>[ ]
+                                                </div>
+                                                <div class="card-body">
+                                                    <p>
+                                                        <span class="card-title"><i class="fa fa-video-camera" aria-hidden="true" style="font-size:15px;"></i>&nbsp;
+                                                <span style="font-size: 20px;font-weight: bold;"> 
+                                                </span>
+                                                        </span> &nbsp;
+                                                        <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet;">
+                                                        </a>
+                                                    </p>
+                                                    <p class="card-text"><i class="fa fa-calculator" aria-hidden="true" style="font-size:15px"></i> &nbsp;
+                                                    </p>
+                                                    <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                    </p>
+
+                                                    <p class="card-text"><i class="fas fa-location-arrow" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                    </p>
+
+                                                    <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                                                    </p>
+                                                </div>
+                                                <div class="card-footer text-danger">
+                                                    <i class="fas fa-dollar-sign"></i>9&nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
+            <script>
+                const container = document.querySelector(".container")
+                    // const list = document.querySelectorAll(".nav-link")
 
+                container.addEventListener("click", (e) => {
+                    var active = document.querySelector(".nav-link.active") //get current active tag
+                    var active_page = document.querySelector(".tab-pane.active") //get current active tag page
+                    if (e.target.classList.contains("nav-link") && !e.target.classList.contains("active")) {
+                        e.target.classList.toggle("active")
+                        active.classList.toggle("active")
+                        const target_page = e.target.getAttribute('aria-controls')
+                        e.target.setAttribute("aria-selected", true)
 
-</body>
+                        const target_papge_id = document.getElementById(target_page)
+                            //change page class to active
+                        target_papge_id.classList.toggle("active") // access to active
+                        active_page.classList.toggle("active")
+                        active.setAttribute("aria-selected", false)
+                    }
+
+                })
+            </script>
+
+    </body>
 
 </html>
