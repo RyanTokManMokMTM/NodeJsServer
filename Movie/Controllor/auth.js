@@ -129,9 +129,9 @@ exports.UserAuth = async(req, res, next) => {
     const userJWT = req.cookies["UserJWT"]
     if (userJWT) { // if cookies include userJWT
         try {
-            console.log(req.cookies)
-                //decode cookie
-                //error first (promisify)
+            //  console.log(req.cookies)
+            //decode cookie
+            //error first (promisify)
             const decodeJWT = await promisify(jwt.verify)(
                 userJWT, process.env.JWT_KEY, (error) => {
                     console.log(error)

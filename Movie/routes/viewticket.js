@@ -80,7 +80,7 @@ route.get("/viewShowTicket", auth.UserAuth, (req, res) => {
 
 })
 
-route.get("/ViewTicketSeat", auth.UserAuth, (req, res) => {
+route.get("/ViewTicketSeat", auth.UserAuth, async(req, res) => {
     if (req.user) {
         //   console.log(req.cookies)
         var info = req.cookies["ticket_movie_info"]
@@ -120,9 +120,10 @@ route.get("/ViewTicketSeat", auth.UserAuth, (req, res) => {
 
 route.get("/ViewUserTicket", auth.UserAuth, async(req, res) => {
     if (req.user) { //if user is login
-        console.log(req.user)
+        var ticket_session
         var user_point = req.user.Cash_point //updated user cashpoint
         var info = req.cookies["ticket_movie_info"].movie_info
+        var session_ids = req.cookies["ticket_movie_info"].session_id
         var full, full_price, discount, discount_price
 
         var full_ticket = req.cookies["FT"]
@@ -142,70 +143,79 @@ route.get("/ViewUserTicket", auth.UserAuth, async(req, res) => {
         }
 
         var seat = JSON.parse(req.cookies["seat"])
-        var ticket_info = []
-        db.query("SELECT `Ticket_id` FROM `user_ticket_record`", [], (error, result) => {
+
+        db.query("SELECT `Session_info`.`Movie_id`,`Session_info`.`Theater_id`,`Session_info`.`Date` FROM `Session_info` WHERE `Session_info`.`Session_id` = ?", [session_ids], (error, session) => {
+            if (error) {
+                console.log(error)
+                res.send(error)
+            } else {
+                ticket_session = session
+            }
+        })
+        var ticket_temp = {}
+        db.query("SELECT `Ticket_id` FROM `user_ticket_record`", [], (error, result) => { //count current ticket id 
             if (error) {
                 console.log(error)
             } else {
-                var ticket_temp = {}
                 for (var i = 0; i < result.length; i++) {
                     ticket_temp[result[i].Ticket_id] = result[i].Ticket_id
                 }
-                console.log(ticket_temp)
-                for (var key in seat) {
-                    var ticketNumber
-                    do {
-                        //check ticket id is unique 
-                        var serialNumber = generateNum.generate(8)
-                        ticketNumber = "FX" + serialNumber
-                    } while (ticket_temp.hasOwnProperty(ticketNumber));
-                    ticket_temp[ticketNumber] = ticketNumber //add to temp list
-
-                    if (full != 0 && full_ticket != undefined && full != undefined) {
-                        var temp = { "ticketserialnum": ticketNumber, "type": "FULL TICKET", "price": full_price, "seat": seat[key] }
-                        full--
-                        ticket_info.push(temp)
-                        db.query("INSERT INTO `Seat_info` SET ?", { Session_id: req.cookies["ticket_movie_info"].session_id, Seat_num: seat[key], Seat_status: true }, async(error, result) => {
-                            if (error) {
-                                console.log(error)
-                            } else {
-                                var seat_id = parseInt(result.insertId)
-                                await db.query("INSERT INTO `user_ticket_record` SET ?", { Ticket_id: ticketNumber, Uid: req.user.Uid, Session_id: req.cookies["ticket_movie_info"].session_id, Seat_id: seat_id, Total_prices: full_price, Payment_type: "cash_point", Ticket_status: "unuse" }, (error, result) => {
-                                    if (error) {
-                                        console.log(error)
-                                    } else {
-                                        console.log(result)
-                                    }
-                                })
-                            }
-                        })
-                    } else if (discount != 0 && discount_ticket != undefined && discount != undefined) {
-                        var temp = { "ticketserialnum": ticketNumber, "type": "DISOCUNT TICKET", "price": discount_price, "seat": seat[key] }
-                        discount--
-                        ticket_info.push(temp)
-                        db.query("INSERT INTO `Seat_info` SET ?", { Session_id: req.cookies["ticket_movie_info"].session_id, Seat_num: seat[key], Seat_status: true }, async(error, result) => {
-                            if (error) {
-                                console.log(error)
-                            } else {
-                                var seat_id = parseInt(result.insertId)
-                                await db.query("INSERT INTO `user_ticket_record` SET ?", { Ticket_id: ticketNumber, Uid: req.user.Uid, Session_id: req.cookies["ticket_movie_info"].session_id, Seat_id: seat_id, Total_prices: discount_price, Payment_type: "cash_point", Ticket_status: "unuse" }, (error, result) => {
-                                    if (error) {
-                                        console.log(error)
-                                    } else {
-                                        console.log(result)
-                                    }
-                                })
-                            }
-                        })
-                    }
-                }
-                return res.render("ticket_view", { info: info, ticket_info: ticket_info, user: req.user })
             }
         })
+        var ticketNumber
+        var ticket_info = []
+        for (var key in seat) {
+            await (db.query("INSERT INTO `Seat_info` SET ?", { Session_id: req.cookies["ticket_movie_info"].session_id, Seat_num: seat[key], Seat_status: true },
+                async(error, result) => {
+                    if (error) {
+                        console.log(error)
+                    } else {
+                        var ticketNumber
+                        do {
+                            //check ticket id is unique 
+                            var serialNumber = generateNum.generate(8)
+                            ticketNumber = "FX" + serialNumber
+                        } while (ticket_temp.hasOwnProperty(ticketNumber));
+                        ticket_temp[ticketNumber] = ticketNumber //add to temp list
+
+                        if (full != 0 && full_ticket != undefined && full != undefined) {
+                            var seat_id = parseInt(result.insertId)
+                                // console.log(ticketNumber)
+                            await (db.query("INSERT INTO `user_ticket_record` SET ?", { Ticket_id: ticketNumber, Uid: req.user.Uid, Movie_id: ticket_session[0].Movie_id, Theater_id: ticket_session[0].Theater_id, Date_id: ticket_session[0].Date, Seat_id: seat_id, Total_prices: full_price, Payment_type: "cash_point", Ticket_status: "unuse", Ticket_type: "FULL TICKET" }, (error, result) => {
+                                if (error) {
+                                    console.log(error)
+                                } else {
+                                    var temp = { "ticketserialnum": ticketNumber, "type": "FULL TICKET", "price": full_price, "seat": seat[key] }
+                                    full--
+                                    ticket_info.push(temp)
+                                }
+                            }))
+                        } else if (discount != 0 && discount_ticket != undefined && discount != undefined) {
+                            var seat_id = parseInt(result.insertId)
+                            await (db.query("INSERT INTO `user_ticket_record` SET ?", { Ticket_id: temp["ticketserialnum"], Uid: req.user.Uid, Movie_id: ticket_session[0].Movie_id, Theater_id: ticket_session[0].Theater_id, Date_id: ticket_session[0].Date, Seat_id: seat_id, Total_prices: discount_price, Payment_type: "cash_point", Ticket_status: "unuse", Ticket_type: "DISOCUNT TICKET" }, (error, result) => {
+                                if (error) {
+                                    console.log(error)
+                                } else {
+                                    var temp = { "ticketserialnum": ticketNumber, "type": "DISOCUNT TICKET", "price": discount_price, "seat": seat[key] }
+                                    discount--
+                                    ticket_info.push(temp)
+                                }
+                            }))
+                        }
+                    }
+                }))
+        }
+
+        // console.log("hi")
+        res.clearCookie("ticket_movie_info")
+        res.clearCookie("FT")
+        res.clearCookie("DT")
+        console.log(ticket_info)
+        res.render("ticket_view", { info: info, ticket_info: ticket_info, user: req.user })
+
     } else {
         res.redirect("../login") //if not login go to login page
     }
-
 })
 
 

@@ -117,10 +117,10 @@
                                 <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#Available " role="tab" aria-controls="Available" aria-selected="true">Available</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link " id="profile-tab" data-bs-toggle="tab" href="#Watched" role="tab" aria-controls="Watched" aria-selected="false">Watched(Recent 10 records)</a>
+                                <a class="nav-link disabled" id="profile-tab" data-bs-toggle="tab" href="#Watched" role="tab" aria-controls="Watched" aria-selected="false">Watched(Recent 10 records)</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="messages-tab" data-bs-toggle="tab" href="#Expired" role="tab" aria-controls="Expired" aria-selected="false">Expired(Recent 10 records)</a>
+                                <a class="nav-link disabled" id="messages-tab" data-bs-toggle="tab" href="#Expired" role="tab" aria-controls="Expired" aria-selected="false">Expired(Recent 10 records)</a>
                             </li>
 
                         </ul>
@@ -128,6 +128,8 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane active" id="Available" role="tabpanel" aria-labelledby="Available-tab">
+                                <!-- Example single danger button -->
+
                                 <% for(var i = 0;i<10;i++){%>
                                     <div class="card card-body" style="margin:2%;">
                                         <div class="d-flex flex-column bd-highlight mb-3">
@@ -244,28 +246,30 @@
 
                 </div>
             </div>
-            <script>
-                const container = document.querySelector(".container")
-                    // const list = document.querySelectorAll(".nav-link")
+        </div>
+        <script>
+            const container = document.querySelector(".container")
+                // const list = document.querySelectorAll(".nav-link")
 
-                container.addEventListener("click", (e) => {
-                    var active = document.querySelector(".nav-link.active") //get current active tag
-                    var active_page = document.querySelector(".tab-pane.active") //get current active tag page
-                    if (e.target.classList.contains("nav-link") && !e.target.classList.contains("active")) {
-                        e.target.classList.toggle("active")
-                        active.classList.toggle("active")
-                        const target_page = e.target.getAttribute('aria-controls')
-                        e.target.setAttribute("aria-selected", true)
+            container.addEventListener("click", (e) => {
+                var active = document.querySelector(".nav-link.active") //get current active tag
+                var active_page = document.querySelector(".tab-pane.active") //get current active tag page
+                if (e.target.classList.contains("nav-link") && !e.target.classList.contains("active")) {
+                    e.target.classList.toggle("active")
+                    active.classList.toggle("active")
+                    const target_page = e.target.getAttribute('aria-controls')
+                    e.target.setAttribute("aria-selected", true)
 
-                        const target_papge_id = document.getElementById(target_page)
-                            //change page class to active
-                        target_papge_id.classList.toggle("active") // access to active
-                        active_page.classList.toggle("active")
-                        active.setAttribute("aria-selected", false)
-                    }
+                    const target_papge_id = document.getElementById(target_page)
+                        //change page class to active
+                    target_papge_id.classList.toggle("active") // access to active
+                    active_page.classList.toggle("active")
+                    active.setAttribute("aria-selected", false)
+                }
 
-                })
-            </script>
+            })
+        </script>
+
 
     </body>
 
