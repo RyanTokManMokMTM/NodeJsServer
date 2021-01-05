@@ -42,7 +42,7 @@
                 </li>
 
                 <li class="nav-item my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">Food Forner</a>
+                    <a class="nav-link disabled" href="#">Food Corner</a>
                 </li>
 
                 <li class="nav-item">
@@ -56,20 +56,11 @@
             <form class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <% if(user) { %>
-                            <a class="nav-link" href="/profile">User Profile <span class="sr-only">(current)</span></a>
-                            <% } else { %>
-                                <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
-                                <% } %>
+                        <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+
                     </li>
                     <li class="nav-item">
-
-
-                        <% if(user) { %>
-                            <a class="nav-link" href="/auth/signout">Sign out <span class="sr-only">(current)</span></a>
-                            <% } else { %>
-                                <a class="nav-link" href="/register">Register</a>
-                                <% } %>
+                        <a class="nav-link" href="/register">Register</a>
                     </li>
                 </ul>
             </form>
