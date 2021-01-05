@@ -31,7 +31,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Movie</a>
+            <a class="navbar-brand" href="/">Movie</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -50,20 +50,42 @@
                         <a class="nav-link" href="/theater">Theater info</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">unavailable</a>
+                        <a class="nav-link" href="/ticket">Ticket</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Top up</a>
                     </li>
 
                     <li class="nav-item my-2 my-lg-0">
-                        <a class="nav-link disabled" href="#">unavailable</a>
+                        <a class="nav-link disabled" href="#">Food Forner</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Service Contact</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/profile">User Profile<span class="sr-only">(current)</span></a>
+                            <% if(user) { %>
+                                <a class="nav-link" href="/profile">User Profile <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/login">Login <span class="sr-only">(current)</span></a>
+                                    <% } %>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/auth/signout">Sign out</a>
+
+
+                            <% if(user) { %>
+                                <a class="nav-link" href="/auth/signout">Sign out <span class="sr-only">(current)</span></a>
+                                <% } else { %>
+                                    <a class="nav-link" href="/register">Register</a>
+                                    <% } %>
                         </li>
                     </ul>
                 </form>
