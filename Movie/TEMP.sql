@@ -82,17 +82,21 @@ DROP TABLE Movie.`Seat_info`;
 
 -- User_ticket_record--
 CREATE TABLE Movie.`User_ticket_record`(
-	`User_ticket_ids` INT NOT NULL AUTO_INCREMENT,
-	`Ticket_id` VARCHAR(10) NOT NULL ,
+	`Ticket_id` INT NOT NULL AUTO_INCREMENT,
     `Uid` INT NOT NULL,
-    `Session_id` INT NOT NULL,
+    `Movie_id` INT NOT NULL,
+    `Theater_id` INT NOT NULL,
+    `Date_id` INT NOT NULL,
     `Seat_id` INT NOT NULL,
     `Total_prices` INT NOT NULL,
 	`Payment_type` VARCHAR(10) NOT NULL,
 	`Ticket_status` VARCHAR(10) NOT NULL,
-    PRIMARY KEY(`User_ticket_ids`),
+    `Ticket_type` VARCHAR(20) NOT NULL,
+    PRIMARY KEY(`Ticket_id`),
     FOREIGN KEY(`Uid`) REFERENCES Movie.`User_info`(`Uid`),
-    FOREIGN KEY(`Session_id`) REFERENCES Movie.`Session_info`(`Session_id`),
+	FOREIGN KEY(`Movie_id`) REFERENCES Movie.`Movie_info`(`Movie_id`),
+	FOREIGN KEY(`Theater_id`) REFERENCES Movie.`Theater_info`(`Theater_id`),
+	FOREIGN KEY(`Date_id`) REFERENCES Movie.`Movie_date_info`(`Movie_date_id`),
 	FOREIGN KEY(`Seat_id`) REFERENCES Movie.`Seat_info`(`Seat_id`)
 );
 DROP TABLE Movie.`User_ticket_record`;
