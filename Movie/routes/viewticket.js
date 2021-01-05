@@ -120,8 +120,11 @@ route.get("/ViewTicketSeat", auth.UserAuth, async(req, res) => {
 
 route.get("/ViewUserTicket", auth.UserAuth, ticket_data.loadTicket, async(req, res) => {
     if (req.user) { //if user is login
-
-        res.redirect("../login")
+        console.log(req.movie_info)
+        res.render("ticket_view", { user: req.user, info: req.movie_info, ticket_info: req.info })
+        res.clearCookie("ticket_movie_info")
+        res.clearCookie("FT")
+        res.clearCookie("DT")
 
     } else {
         res.redirect("../login") //if not login go to login page
