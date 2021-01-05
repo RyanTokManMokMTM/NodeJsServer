@@ -24,6 +24,7 @@ server.use("/auth", require("./routes/auth")) // when server get with / or /xxx 
 server.use("/info", require("./routes/info")) // when server get with / or /xxx /xxxxe etc  will go into routes page js to match
 server.use("/data", require("./routes/getData"))
 server.use("/ticket/", require("./routes/viewticket"))
+server.use("/RefundTicket", require("./routes/user_ticke"))
 
 //Server setting
 server.listen(9001, () => {

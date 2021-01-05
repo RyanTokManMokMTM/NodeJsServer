@@ -4,6 +4,7 @@ const cookie = require("cookie-parser");
 const dotenv = require("dotenv")
 const { promisify } = require("util")
 const generateNum = require("generate-serial-number")
+const dataformats = require("dateformat")
 
 
 exports.loadTicket = (req, res, next) => {
@@ -104,6 +105,41 @@ exports.loadTicket = (req, res, next) => {
 
                     }
                 })
+            }
+        })
+    } else {
+        next()
+    }
+}
+
+exports.loadUserOwnTicket = (req, res, next) => {
+    if (req.user) {
+        var uid = req.user.Uid
+            //TODO get uid ticket list with unuse
+        db.query("SELECT `user_ticket_record`.`Ticket_id`,`user_ticket_record`.`Total_prices`,`user_ticket_record`.`Payment_type`,`user_ticket_record`.`Ticket_type`,`Movie_info`.`Movie_name`,`Movie_info`.`Movie_restricted_level`,`Theater_info`.`Theater_name`,`movie_date_info`.`Date`,`movie_date_info`.`Time` ,`Seat_info`.`Seat_num` FROM `user_ticket_record` INNER JOIN `Movie_info` on `user_ticket_record`.`Movie_id` = `Movie_info`.`Movie_id` INNER JOIN `Theater_info` ON `user_ticket_record`.`Theater_id`= `Theater_info`.`Theater_id` INNER JOIN `movie_date_info` ON `user_ticket_record`.`Date_id` = `movie_date_info`.`Movie_date_id` INNER JOIN `seat_info` ON `user_ticket_record`.`seat_id` =`seat_info`.`Seat_id` WHERE `user_ticket_record`.`Uid` = ? ORDER BY `Movie_info`.`Movie_name`", [uid], (error, result) => {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log("test")
+                    //   console.log(result)
+                let ticket_info = result
+                for (var i = 0; i < result.length; i++) {
+                    let ticket_num = result[i].Ticket_id
+                    let Ticket_Number = ticket_num.toString()
+                    let Ticket_serial_num = "FX" + Ticket_Number.padStart(8, '0')
+                    ticket_info[i]["TicketNum"] = Ticket_serial_num
+                    let temp = result[i].Date
+                    let temp_date = dataformats(temp, "fullDate")
+                    ticket_info[i].Date = temp_date
+
+                    let temp_time = result[i].Time
+                    let temp_time_s = temp_time.slice(0, -3)
+                    ticket_info[i].Time = temp_time_s
+                }
+                //console.log(ticket_info)
+                req.user_ticket = ticket_info
+                    //  console.log(ticket_info)
+                next()
             }
         })
     } else {

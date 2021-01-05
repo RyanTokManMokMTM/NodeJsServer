@@ -2,6 +2,7 @@ const { Router } = require("express");
 const express = require("express");
 const authControllor = require("../Controllor/auth")
 const infoControllor = require("../Controllor/info");
+const userTicketGetter = require("../Controllor/ticket_Data")
 const { db } = require("../db");
 const route = express.Router();
 
@@ -21,10 +22,10 @@ route.get("/register", (req, res) => {
 });
 
 
-route.get("/profile", authControllor.UserAuth, (req, res) => {
+route.get("/profile", authControllor.UserAuth, userTicketGetter.loadUserOwnTicket, (req, res) => {
     //chenking user authorization
     if (req.user) {
-        res.render("profile", { user: req.user })
+        res.render("profile", { user: req.user, ticket_info: req.user_ticket })
     } else {
         console.log("not login yet")
         res.redirect("/login")

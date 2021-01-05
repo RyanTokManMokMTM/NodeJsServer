@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<%user;%>
+<%user,ticket_info;%>
 
     <head>
         <meta charset="UTF-8">
@@ -89,7 +89,6 @@
 
 
             <div class=" col-md-7 " style=" margin-left: 2%; ">
-
                 <div class="card text-center ">
                     <div class="card-header ">
                         Featured
@@ -130,116 +129,118 @@
                             <div class="tab-pane active" id="Available" role="tabpanel" aria-labelledby="Available-tab">
                                 <!-- Example single danger button -->
 
-                                <% for(var i = 0;i<10;i++){%>
-                                    <div class="card card-body" style="margin:2%;">
+                                <% for(var i = 0;i<ticket_info.length;i++){%>
+                                    <div id="TicketDiv<%=ticket_info[i].Ticket_id %>" class="card card-body" style="margin:2%;">
                                         <div class="d-flex flex-column bd-highlight mb-3">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b></b>[ ]
+                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b> <%=ticket_info[i].TicketNum %></b> [
+                                                    <%=ticket_info[i].Ticket_type %>]
                                                 </div>
                                                 <div class="card-body">
                                                     <p>
                                                         <span class="card-title"><i class="fa fa-video-camera" aria-hidden="true" style="font-size:15px;"></i>&nbsp;
                                                     <span style="font-size: 20px;font-weight: bold;"> 
+                                                        <%=ticket_info[i].Movie_name %>
                                                     </span>
                                                         </span> &nbsp;
                                                         <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet;">
+                                                            <%=ticket_info[i].Movie_restricted_level %>
                                                         </a>
                                                     </p>
                                                     <p class="card-text"><i class="fa fa-calculator" aria-hidden="true" style="font-size:15px"></i> &nbsp;
+                                                        <%=ticket_info[i].Date %>
                                                     </p>
                                                     <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                        <%=ticket_info[i].Time %>
                                                     </p>
 
                                                     <p class="card-text"><i class="fas fa-location-arrow" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
+                                                        <%=ticket_info[i].Seat_num %>
                                                     </p>
 
                                                     <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
+                                                        <%=ticket_info[i].Theater_name %>
                                                     </p>
                                                 </div>
                                                 <div class="card-footer text-danger">
-                                                    <i class="fas fa-dollar-sign"></i>9&nbsp;
-                                                    <button type="button" class="btn btn-success btn-sm">Refund ticket</button>
-
-
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                    <%=ticket_info[i].Total_prices %>&nbsp;
+                                                        <button type="button" id="<%=ticket_info[i].Ticket_id %>" name="<%=ticket_info[i].Ticket_id %>" class=" btn btn-success btn-sm " onclick="refund(this.id)">Refund ticket</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <%}%>
                             </div>
-                            <div class="tab-pane " id="Watched" role="tabpanel" aria-labelledby="Watched-tab">
-                                <% for(var i = 0;i<10;i++){%>
-                                    <div class="card card-body" style="margin:2%;">
-                                        <div class="d-flex flex-column bd-highlight mb-3">
-                                            <div class="card">
-                                                <div class="card-header" style="color: gray;">
-                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b></b>[ ]
-                                                </div>
-                                                <div class="card-body">
-                                                    <p>
-                                                        <span class="card-title"><i class="fa fa-video-camera" aria-hidden="true" style="font-size:15px;"></i>&nbsp;
-                                                    <span style="font-size: 20px;font-weight: bold;"> 
+                            <div class="tab-pane " id="Watched " role="tabpanel " aria-labelledby="Watched-tab ">
+                                <div class="card card-body " style="margin:2%; ">
+                                    <div class="d-flex flex-column bd-highlight mb-3 ">
+                                        <div class="card ">
+                                            <div class="card-header " style="color: gray; ">
+                                                <i class="fa fa-ticket " aria-hidden="true "></i> <b></b>[ ]
+                                            </div>
+                                            <div class="card-body ">
+                                                <p>
+                                                    <span class="card-title "><i class="fa fa-video-camera " aria-hidden="true " style="font-size:15px; "></i>&nbsp;
+                                                    <span style="font-size: 20px;font-weight: bold; "> 
                                                     </span>
-                                                        </span> &nbsp;
-                                                        <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet;">
-                                                        </a>
-                                                    </p>
-                                                    <p class="card-text"><i class="fa fa-calculator" aria-hidden="true" style="font-size:15px"></i> &nbsp;
-                                                    </p>
-                                                    <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
-                                                    </p>
+                                                    </span> &nbsp;
+                                                    <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet; ">
+                                                    </a>
+                                                </p>
+                                                <p class="card-text "><i class="fa fa-calculator " aria-hidden="true " style="font-size:15px "></i> &nbsp;
+                                                </p>
+                                                <p class="card-text "><i class="fa fa-clock-o " aria-hidden="true " style="font-size:15px; "></i> &nbsp;
+                                                </p>
 
-                                                    <p class="card-text"><i class="fas fa-location-arrow" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
-                                                    </p>
+                                                <p class="card-text "><i class="fas fa-location-arrow " aria-hidden="true " style="font-size:15px; "></i> &nbsp;
+                                                </p>
 
-                                                    <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
-                                                    </p>
-                                                </div>
-                                                <div class="card-footer text-danger">
-                                                    <i class="fas fa-dollar-sign"></i>9&nbsp;
-                                                </div>
+                                                <p class="card-text "><i class="fas fa-map-marker-alt " aria-hidden="true " style="font-size:16px;font-size:15px "></i> &nbsp;
+                                                </p>
+                                            </div>
+                                            <div class="card-footer text-danger ">
+                                                <i class="fas fa-dollar-sign "></i>9&nbsp;
                                             </div>
                                         </div>
                                     </div>
-                                    <%}%>
+                                </div>
 
                             </div>
-                            <div class="tab-pane" id="Expired" role="tabpanel" aria-labelledby="Expired-tab">
-                                <% for(var i = 0;i<10;i++){%>
-                                    <div class="card card-body" style="margin:2%;">
-                                        <div class="d-flex flex-column bd-highlight mb-3">
-                                            <div class="card">
-                                                <div class="card-header" style="color: red;">
-                                                    <i class="fa fa-ticket" aria-hidden="true"></i> <b></b>[ ]
-                                                </div>
-                                                <div class="card-body">
-                                                    <p>
-                                                        <span class="card-title"><i class="fa fa-video-camera" aria-hidden="true" style="font-size:15px;"></i>&nbsp;
-                                                <span style="font-size: 20px;font-weight: bold;"> 
+                            <div class="tab-pane " id="Expired " role="tabpanel " aria-labelledby="Expired-tab ">
+                                <div class="card card-body " style="margin:2%; ">
+                                    <div class="d-flex flex-column bd-highlight mb-3 ">
+                                        <div class="card ">
+                                            <div class="card-header " style="color: red; ">
+                                                <i class="fa fa-ticket " aria-hidden="true "></i> <b></b>[ ]
+                                            </div>
+                                            <div class="card-body ">
+                                                <p>
+                                                    <span class="card-title "><i class="fa fa-video-camera " aria-hidden="true " style="font-size:15px; "></i>&nbsp;
+                                                <span style="font-size: 20px;font-weight: bold; "> 
                                                 </span>
-                                                        </span> &nbsp;
-                                                        <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet;">
-                                                        </a>
-                                                    </p>
-                                                    <p class="card-text"><i class="fa fa-calculator" aria-hidden="true" style="font-size:15px"></i> &nbsp;
-                                                    </p>
-                                                    <p class="card-text"><i class="fa fa-clock-o" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
-                                                    </p>
+                                                    </span> &nbsp;
+                                                    <a href="# " class="btn btn btn-secondary btn-sm " role="button " data-bs-toggle="button " style="background-color:blueviolet; ">
+                                                    </a>
+                                                </p>
+                                                <p class="card-text "><i class="fa fa-calculator " aria-hidden="true " style="font-size:15px "></i> &nbsp;
+                                                </p>
+                                                <p class="card-text "><i class="fa fa-clock-o " aria-hidden="true " style="font-size:15px; "></i> &nbsp;
+                                                </p>
 
-                                                    <p class="card-text"><i class="fas fa-location-arrow" aria-hidden="true" style="font-size:15px;"></i> &nbsp;
-                                                    </p>
+                                                <p class="card-text "><i class="fas fa-location-arrow " aria-hidden="true " style="font-size:15px; "></i> &nbsp;
+                                                </p>
 
-                                                    <p class="card-text"><i class="fas fa-map-marker-alt" aria-hidden="true" style="font-size:16px;font-size:15px"></i> &nbsp;
-                                                    </p>
-                                                </div>
-                                                <div class="card-footer text-danger">
-                                                    <i class="fas fa-dollar-sign"></i>9&nbsp;
-                                                </div>
+                                                <p class="card-text "><i class="fas fa-map-marker-alt " aria-hidden="true " style="font-size:16px;font-size:15px "></i> &nbsp;
+                                                </p>
+                                            </div>
+                                            <div class="card-footer text-danger ">
+                                                <i class="fas fa-dollar-sign "></i>9&nbsp;
                                             </div>
                                         </div>
                                     </div>
-                                    <%}%>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -247,24 +248,42 @@
                 </div>
             </div>
         </div>
-        <script>
-            const container = document.querySelector(".container")
-                // const list = document.querySelectorAll(".nav-link")
 
-            container.addEventListener("click", (e) => {
-                var active = document.querySelector(".nav-link.active") //get current active tag
-                var active_page = document.querySelector(".tab-pane.active") //get current active tag page
-                if (e.target.classList.contains("nav-link") && !e.target.classList.contains("active")) {
-                    e.target.classList.toggle("active")
-                    active.classList.toggle("active")
+        <script>
+            function refund(ticket_id) {
+                var div_id = "TicketDiv" + ticket_id
+                var div = document.getElementById(div_id)
+                console.log(div)
+                let req = new XMLHttpRequest()
+                let url = "/RefundTicket/Refund/" + ticket_id
+
+                req.open("GET", "/RefundTicket/Refund/" + ticket_id)
+                req.responseType = "json"
+                req.onload = () => {
+                    var data = req.response
+                    div.parentNode.removeChild(div)
+                }
+                req.send()
+            }
+
+
+            const container = document.querySelector(".container ")
+                // const list = document.querySelectorAll(".nav-link ")
+
+            container.addEventListener("click ", (e) => {
+                var active = document.querySelector(".nav-link.active ") //get current active tag
+                var active_page = document.querySelector(".tab-pane.active ") //get current active tag page
+                if (e.target.classList.contains("nav-link ") && !e.target.classList.contains("active ")) {
+                    e.target.classList.toggle("active ")
+                    active.classList.toggle("active ")
                     const target_page = e.target.getAttribute('aria-controls')
-                    e.target.setAttribute("aria-selected", true)
+                    e.target.setAttribute("aria-selected ", true)
 
                     const target_papge_id = document.getElementById(target_page)
                         //change page class to active
-                    target_papge_id.classList.toggle("active") // access to active
-                    active_page.classList.toggle("active")
-                    active.setAttribute("aria-selected", false)
+                    target_papge_id.classList.toggle("active ") // access to active
+                    active_page.classList.toggle("active ")
+                    active.setAttribute("aria-selected ", false)
                 }
 
             })
