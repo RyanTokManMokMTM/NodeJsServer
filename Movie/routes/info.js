@@ -2,6 +2,7 @@ const express = require("express");
 const db = require("../db").db
 const route = express.Router();
 const auth = require("../Controllor/auth")
+const dataformat = require("dateformat")
 
 db.getConnection((error) => {
     if (error) {
@@ -25,12 +26,16 @@ route.get('/movie_detail', auth.UserAuth, async(req, res) => {
                     return res.render("movie_detail", { movie_detail: null, select_info: null, user: req.user })
                 } else {
                     //console.log(result[0])
+                    let data = result[0].Movie_release_date
+                    let data_format = dataformat(data, "fullDate")
+                    result[0].Movie_release_date = data_format
                     await db.query("SELECT `Movie_id` , `Movie_name` FROM `movie_info`", [], (errors, results) => {
                         if (errors) {
                             console.log(errors)
+
                             return res.render("movie_detail", { movie_detail: result[0], select_info: null, user: req.user })
                         } else {
-                            //console.log(results)
+                            // console.log(result)
                             return res.render("movie_detail", { movie_detail: result[0], select_info: results, user: req.user })
                         }
                     })
@@ -44,9 +49,11 @@ route.get('/movie_detail', auth.UserAuth, async(req, res) => {
                     return res.render("movie_detail", { movie_detail: null, select_info: null, user: req.user })
                 } else {
                     //console.log(result[0])
+                    let data = result[0].Movie_release_date
+                    let data_format = dataformat(data, "fullDate")
+                    result[0].Movie_release_date = data_format
                     await db.query("SELECT `Movie_id` , `Movie_name` FROM `movie_info`", [], (errors, results) => {
                         if (errors) {
-                            console.log(errors)
                             return res.render("movie_detail", { movie_detail: result[0], select_info: null, user: req.user })
                         } else {
                             //console.log(results)

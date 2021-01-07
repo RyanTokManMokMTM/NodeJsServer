@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 05/01/2021 16:56:05
+ Date: 07/01/2021 01:52:11
 */
 
 SET NAMES utf8mb4;
@@ -27,16 +27,20 @@ CREATE TABLE `movie_date_info`  (
   `Date` date NOT NULL,
   `Time` time(0) NOT NULL,
   PRIMARY KEY (`Movie_date_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movie_date_info
 -- ----------------------------
 INSERT INTO `movie_date_info` VALUES (1, 1, '2020-12-22', '08:00:00');
 INSERT INTO `movie_date_info` VALUES (2, 1, '2020-12-22', '10:00:00');
-INSERT INTO `movie_date_info` VALUES (3, 1, '2020-12-22', '12:00:00');
+INSERT INTO `movie_date_info` VALUES (3, 1, '2020-12-22', '10:00:00');
 INSERT INTO `movie_date_info` VALUES (4, 2, '2020-12-24', '10:00:00');
 INSERT INTO `movie_date_info` VALUES (5, 2, '2020-12-24', '14:00:00');
+INSERT INTO `movie_date_info` VALUES (6, 1, '2020-12-22', '09:30:00');
+INSERT INTO `movie_date_info` VALUES (7, 3, '2020-12-25', '08:35:00');
+INSERT INTO `movie_date_info` VALUES (8, 3, '2020-12-25', '10:50:00');
+INSERT INTO `movie_date_info` VALUES (9, 4, '2021-01-25', '13:00:00');
 
 -- ----------------------------
 -- Table structure for movie_info
@@ -57,7 +61,7 @@ CREATE TABLE `movie_info`  (
   `Movie_restricted_level` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Movie_status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`Movie_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movie_info
@@ -66,6 +70,10 @@ INSERT INTO `movie_info` VALUES (1, 'Avengers: Endgame', '2019-04-22', 'Action',
 INSERT INTO `movie_info` VALUES (2, 'The Nun', '2018-09-04', 'Horror,Suspense', 'English', 96, 'Demián Bichir. ,Taissa Farmiga , Jonas Bloquet', 'Corin Hard', '456', 'the-nun.jpg', 'https://www.youtube.com/embed/pzD9zGcUNrw', '16+', 'Hot');
 INSERT INTO `movie_info` VALUES (3, 'It', '2017-09-05', 'Horror,Suspense', 'English', 135, 'Jaeden Martell ,Jeremy Ray Taylor , Sophia Lillis', 'Andy Muschietti', '789', 'it.jpg', 'https://www.youtube.com/embed/FnCdOQsX5kc', '16+', 'Hot');
 INSERT INTO `movie_info` VALUES (4, 'Iron man 3', '2013-04-14', 'Action', 'English', 131, 'Robert Downey Jr. ,Gwyneth Paltrow ,Don Cheadle', 'Shane Black', 'abc', 'iron-3.jpg', 'https://www.youtube.com/embed/Ke1Y3P9D0Bc', '16+', 'Hot');
+INSERT INTO `movie_info` VALUES (5, 'Spider-Man: Homecoming', '2017-07-28', 'Action', 'English', 133, 'Tom Holland ,Michael Keaton ,Robert Downey Jr.', 'Jon Watts', 'Following the Battle of New York,[N 1] Adrian Toomes and his salvage company are contracted to clean up the city, but their operation is taken over by the Department of Damage Control (D.O.D.C.), a partnership between Tony Stark and the U.S. government. Enraged at being driven out of business, Toomes persuades his employees to keep the Chitauri technology they have already scavenged and use it to create and sell advanced weapons. Eight years later, Peter Parker is drafted into the Avengers by Stark to help with an internal dispute in Berlin,[N 2] but resumes his studies at the Midtown School of Science and Technology when Stark tells him he is not yet ready to become a full Avenger.\n\nParker quits his school\'s academic decathlon team to spend more time focusing on his crime-fighting activities as Spider-Man. One night, after preventing criminals from robbing an ATM with their advanced weapons Toomes sold them, Parker returns to his Queens apartment, where his best friend Ned discovers his secret identity. On another night, Parker comes across Toomes\' associates Jackson Brice / Shocker and Herman Schultz selling weapons to local criminal Aaron Davis. Parker saves Davis before being caught by Toomes and dropped in a lake, nearly drowning after becoming tangled in a parachute built into his suit. He is rescued by Stark, who is monitoring the Spider-Man suit he gave Parker and warns him against further involvement with the criminals. Toomes accidentally kills Brice with one of their weapons, and Schultz becomes the new Shocker.', 'siperHome.jpeg', 'https://www.youtube.com/embed/U0D3AOldjMU', '16+', 'Hot');
+INSERT INTO `movie_info` VALUES (6, 'The Avengers', '2012-04-11', 'Action', 'English', 143, '	\r\nRobert Downey Jr.,Chris Evans,Mark Ruffalo', 'Joss Whedon', 'The Asgardian Loki encounters the Other, the leader of an extraterrestrial race known as the Chitauri. In exchange for retrieving the Tesseract,[N 2] a powerful energy source of unknown potential, the Other promises Loki an army with which he can subjugate Earth. Nick Fury, director of the espionage agency S.H.I.E.L.D., and his lieutenant Agent Maria Hill arrive at a remote research facility during an evacuation, where physicist Dr. Erik Selvig is leading a research team experimenting on the Tesseract. Agent Phil Coulson says that the object has begun radiating an unusual form of energy. The Tesseract suddenly activates and opens a wormhole, allowing Loki to reach Earth. Loki takes the Tesseract and uses his scepter to enslave Selvig and a few other agents, including Clint Barton, to aid him in his getaway.\r\n\r\nIn response to the attack, Fury reactivates the \"Avengers Initiative\". Agent Natasha Romanoff sends to Kolkata to recruit Dr. Bruce Banner to trace the Tesseract through its gamma radiation emissions. Coulson visits Tony Stark to have him check Selvig\'s research, and Fury approaches Steve Rogers with an assignment to retrieve the Tesseract.', 'ava1.jpg', 'https://www.youtube.com/embed/hIR8Ar-Z4hw', '16+', 'Hot');
+INSERT INTO `movie_info` VALUES (7, 'Wonder Woman 1984', '2020-12-17', 'Action', 'English', 151, ' Gal Gadot,Chris Pine, Kristen Wiig', 'Patty Jenkins', 'In her youth, Diana Prince participates in an island-spanning athletic race on Themyscira against older Amazons. After falling from her horse, Diana takes a shortcut to catch up. However, Antiope removes her from the competition for this, lecturing Diana that any worthwhile goal must be achieved through honest effort..\r\n\r\nIn 1984, Diana works at the Smithsonian Institution in Washington, D.C., while clandestinely performing heroic deeds as a costumed crime fighter. Diana introduces herself to Barbara Ann Minerva, a new archaeologist and zoologist with the museum. Barbara is good-natured, socially awkward and unassertive, which make most people look past her. She forms a friendship with Diana, whom she comes to admire and envy. Barbara is asked by the FBI to identify stolen antiquities from a robbery Diana had foiled. Barbara and Diana notice one artifact — later revealed to be the \"Dreamstone\" — contains a Latin inscription claiming that anyone holding it will have any one wish granted. Diana unknowingly uses the stone to wish her deceased lover Steve Trevor back to life. After being saved by Diana from an attempted sexual assault, Barbara wishes upon the stone to become like Diana, attaining Diana\'s superpowers.', 'woman.jpg', 'https://www.youtube.com/embed/OASpkr_ljhw', '12+', 'Hot');
+INSERT INTO `movie_info` VALUES (8, 'Venom', '2018-10-03', 'Action', 'English', 112, 'Edward Thomas,Michelle Ingrid Williams,Riz Ahmed', 'Ruben Samuel Fleischer', 'While exploring space for new habitable worlds, a probe belonging to the bio-engineering corporation Life Foundation discovers a comet covered in symbiotic lifeforms. The probe returns to Earth with four samples, but one escapes and causes the ship to crash in Malaysia. The Life Foundation recovers the other three and transports them to their research facility in San Francisco, where they discover that the symbiotes cannot survive without oxygen-breathing hosts, which often fatally reject the symbiosis. Investigative journalist Eddie Brock reads about these human trials in a classified document in the possession of his fiancée Anne Weying, an attorney preparing a lawsuit defense for the Life Foundation. Brock confronts Life Foundation CEO Carlton Drake about the trials, leading to both Brock and Weying losing their jobs. Consequently, Weying ends their relationship.\r\n\r\nSix months later, Drake\'s symbiosis trials are closer to success, though one of his symbiotes dies due to carelessness. Brock is approached by Dora Skirth, one of Drake\'s scientists who disagrees with his methods and wants to expose him. She helps Brock break into the research facility to search for evidence, and he learns that an acquaintance of his, a homeless woman named Maria, is one of the test subjects. Brock attempts to rescue Maria, but the symbiote possessing her transfers to his body without him realizing, leaving her dead. Brock escapes and soon begins displaying strange symptoms. He reaches out to Weying for help, and her new boyfriend, Dr. Dan Lewis, discovers the symbiote on examining Brock. Drake exposes Skirth to the remaining captive symbiote, killing both. This leaves the symbiote inside Brock as the only known surviving specimen.', 'vemon.jpg', 'https://www.youtube.com/embed/u9Mv98Gr5pY', '18+', 'Hot');
 
 -- ----------------------------
 -- Table structure for seat_info
@@ -79,30 +87,11 @@ CREATE TABLE `seat_info`  (
   PRIMARY KEY (`Seat_id`) USING BTREE,
   INDEX `Session_id`(`Session_id`) USING BTREE,
   CONSTRAINT `seat_info_ibfk_1` FOREIGN KEY (`Session_id`) REFERENCES `session_info` (`Session_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of seat_info
 -- ----------------------------
-INSERT INTO `seat_info` VALUES (1, 1, 'A1', 1);
-INSERT INTO `seat_info` VALUES (2, 1, 'A2', 1);
-INSERT INTO `seat_info` VALUES (3, 1, 'B2', 1);
-INSERT INTO `seat_info` VALUES (4, 1, 'B1', 1);
-INSERT INTO `seat_info` VALUES (5, 1, 'B3', 1);
-INSERT INTO `seat_info` VALUES (6, 1, 'A3', 1);
-INSERT INTO `seat_info` VALUES (7, 1, 'B5', 1);
-INSERT INTO `seat_info` VALUES (8, 1, 'A4', 1);
-INSERT INTO `seat_info` VALUES (9, 1, 'B4', 1);
-INSERT INTO `seat_info` VALUES (10, 1, 'B5', 1);
-INSERT INTO `seat_info` VALUES (11, 1, 'A4', 1);
-INSERT INTO `seat_info` VALUES (12, 1, 'B4', 1);
-INSERT INTO `seat_info` VALUES (13, 1, 'C2', 1);
-INSERT INTO `seat_info` VALUES (14, 1, 'C3', 1);
-INSERT INTO `seat_info` VALUES (15, 1, 'A4', 1);
-INSERT INTO `seat_info` VALUES (16, 1, 'A5', 1);
-INSERT INTO `seat_info` VALUES (17, 1, 'A5', 1);
-INSERT INTO `seat_info` VALUES (18, 1, 'A5', 1);
-INSERT INTO `seat_info` VALUES (19, 1, 'A5', 1);
 
 -- ----------------------------
 -- Table structure for session_info
@@ -121,7 +110,7 @@ CREATE TABLE `session_info`  (
   CONSTRAINT `session_info_ibfk_1` FOREIGN KEY (`Theater_id`) REFERENCES `theater_info` (`Theater_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `session_info_ibfk_2` FOREIGN KEY (`Movie_id`) REFERENCES `movie_info` (`Movie_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `session_info_ibfk_3` FOREIGN KEY (`Date`) REFERENCES `movie_date_info` (`Movie_date_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of session_info
@@ -131,7 +120,71 @@ INSERT INTO `session_info` VALUES (2, 2, 1, 1, 200);
 INSERT INTO `session_info` VALUES (3, 3, 1, 2, 200);
 INSERT INTO `session_info` VALUES (4, 4, 1, 3, 200);
 INSERT INTO `session_info` VALUES (5, 5, 2, 1, 200);
+INSERT INTO `session_info` VALUES (6, 1, 1, 4, 250);
+INSERT INTO `session_info` VALUES (7, 2, 1, 5, 150);
+INSERT INTO `session_info` VALUES (8, 3, 1, 6, 350);
+INSERT INTO `session_info` VALUES (9, 2, 1, 7, 200);
+INSERT INTO `session_info` VALUES (10, 4, 1, 8, 220);
+INSERT INTO `session_info` VALUES (11, 5, 2, 1, 200);
+INSERT INTO `session_info` VALUES (12, 3, 2, 2, 200);
+INSERT INTO `session_info` VALUES (13, 6, 2, 3, 250);
+INSERT INTO `session_info` VALUES (14, 1, 2, 4, 200);
+INSERT INTO `session_info` VALUES (15, 4, 2, 5, 200);
+INSERT INTO `session_info` VALUES (16, 2, 2, 6, 200);
+INSERT INTO `session_info` VALUES (17, 6, 2, 7, 250);
+INSERT INTO `session_info` VALUES (18, 1, 2, 8, 300);
 
+INSERT INTO `session_info` VALUES (19, 2, 3, 1, 200);
+INSERT INTO `session_info` VALUES (20, 3, 3, 2, 200);
+INSERT INTO `session_info` VALUES (22, 4, 3, 3, 200);
+INSERT INTO `session_info` VALUES (23, 1, 3, 4, 200);
+INSERT INTO `session_info` VALUES (24, 5, 3, 5, 200);
+INSERT INTO `session_info` VALUES (25, 2, 3, 6, 250);
+INSERT INTO `session_info` VALUES (26, 1, 3, 7, 150);
+INSERT INTO `session_info` VALUES (27, 3, 3, 8, 350);
+INSERT INTO `session_info` VALUES (30, 3, 4, 1, 200);
+INSERT INTO `session_info` VALUES (31, 3, 4, 2, 200);
+INSERT INTO `session_info` VALUES (32, 2, 4, 3, 250);
+INSERT INTO `session_info` VALUES (33, 1, 4, 4, 200);
+INSERT INTO `session_info` VALUES (34, 3, 4, 5, 200);
+INSERT INTO `session_info` VALUES (35, 5, 4, 6, 200);
+INSERT INTO `session_info` VALUES (36, 6, 4, 7, 250);
+INSERT INTO `session_info` VALUES (37, 3, 4, 8, 300);
+
+INSERT INTO `session_info` VALUES (38, 3, 5, 1, 200);
+INSERT INTO `session_info` VALUES (39, 3, 5, 2, 200);
+INSERT INTO `session_info` VALUES (40, 1, 5, 3, 200);
+INSERT INTO `session_info` VALUES (41, 1, 5, 4, 200);
+INSERT INTO `session_info` VALUES (42, 2, 5, 5, 200);
+INSERT INTO `session_info` VALUES (43, 2, 5, 6, 250);
+INSERT INTO `session_info` VALUES (44, 4, 5, 7, 150);
+INSERT INTO `session_info` VALUES (45, 3, 5, 8, 350);
+INSERT INTO `session_info` VALUES (48, 1, 6, 1, 200);
+INSERT INTO `session_info` VALUES (49, 2, 6, 2, 200);
+INSERT INTO `session_info` VALUES (50, 3, 6, 3, 250);
+INSERT INTO `session_info` VALUES (51, 4, 6, 4, 200);
+INSERT INTO `session_info` VALUES (52, 5, 6, 5, 200);
+INSERT INTO `session_info` VALUES (53, 3, 6, 6, 200);
+INSERT INTO `session_info` VALUES (54, 2, 6, 7, 250);
+INSERT INTO `session_info` VALUES (55, 2, 6, 8, 300);
+
+
+INSERT INTO `session_info` VALUES (56, 3, 7, 1, 200);
+INSERT INTO `session_info` VALUES (57, 3, 7, 2, 200);
+INSERT INTO `session_info` VALUES (58, 1, 7, 3, 200);
+INSERT INTO `session_info` VALUES (59, 1, 7, 4, 200);
+INSERT INTO `session_info` VALUES (60, 2, 7, 5, 200);
+INSERT INTO `session_info` VALUES (61, 2, 7, 6, 250);
+INSERT INTO `session_info` VALUES (62, 4, 7, 7, 150);
+INSERT INTO `session_info` VALUES (63, 3, 7, 8, 350);
+INSERT INTO `session_info` VALUES (66, 1, 8, 1, 200);
+INSERT INTO `session_info` VALUES (67, 2, 8, 2, 200);
+INSERT INTO `session_info` VALUES (68, 3, 8, 3, 250);
+INSERT INTO `session_info` VALUES (69, 4, 8, 4, 200);
+INSERT INTO `session_info` VALUES (70, 5, 8, 5, 200);
+INSERT INTO `session_info` VALUES (71, 3, 8, 6, 200);
+INSERT INTO `session_info` VALUES (72, 2, 8, 7, 250);
+INSERT INTO `session_info` VALUES (73, 2, 8, 8, 300);
 -- ----------------------------
 -- Table structure for theater_info
 -- ----------------------------
@@ -145,7 +198,7 @@ CREATE TABLE `theater_info`  (
   `Theater_close_time` time(0) NULL DEFAULT NULL,
   `Theater_image_src` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`Theater_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of theater_info
@@ -173,12 +226,11 @@ CREATE TABLE `user_info`  (
   `Cash_point` int NULL DEFAULT 9999,
   PRIMARY KEY (`Uid`) USING BTREE,
   UNIQUE INDEX `Email`(`Email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_info
 -- ----------------------------
-INSERT INTO `user_info` VALUES (1, 'RyanTokManMokMTM@hotmail.com', '$2a$08$YUGuGWOTT8fdT0v6XjLE8eHO2POHICmgQenNEaCTxDA5fwhYIR8P6', 'Hi i\'m new user.', '鐸文', '莫', 9999);
 
 -- ----------------------------
 -- Table structure for user_ticket_record
@@ -206,23 +258,10 @@ CREATE TABLE `user_ticket_record`  (
   CONSTRAINT `user_ticket_record_ibfk_3` FOREIGN KEY (`Theater_id`) REFERENCES `theater_info` (`Theater_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_ticket_record_ibfk_4` FOREIGN KEY (`Date_id`) REFERENCES `movie_date_info` (`Movie_date_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `user_ticket_record_ibfk_5` FOREIGN KEY (`Seat_id`) REFERENCES `seat_info` (`Seat_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_ticket_record
 -- ----------------------------
-INSERT INTO `user_ticket_record` VALUES (1, 1, 1, 1, 1, 1, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (2, 1, 1, 1, 1, 2, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (3, 1, 1, 1, 1, 3, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (4, 1, 1, 1, 1, 4, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (5, 1, 1, 1, 1, 5, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (6, 1, 1, 1, 1, 6, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (7, 1, 1, 1, 1, 7, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (8, 1, 1, 1, 1, 8, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (9, 1, 1, 1, 1, 9, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (10, 1, 1, 1, 1, 11, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (11, 1, 1, 1, 1, 12, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (12, 1, 1, 1, 1, 13, 200, 'cash_point', 'unuse', 'FULL TICKET');
-INSERT INTO `user_ticket_record` VALUES (13, 1, 1, 1, 1, 14, 200, 'cash_point', 'unuse', 'FULL TICKET');
 
 SET FOREIGN_KEY_CHECKS = 1;

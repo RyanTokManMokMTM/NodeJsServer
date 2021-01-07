@@ -93,31 +93,33 @@ exports.login = async(req, res) => {
 
                 return
             }
+            if (result.length > 0) {
+                if (!result || !(await bcrypt.compare(Password, result[0].Password))) {
+                    return res.status(401).render("login", { message: "Email or Password is incorrect." })
+                        //status 401 unauth
+                } else {
+                    //JWT content
+                    const id = result[0].Uid;
+                    const JWTObj = { id, email };
+                    const user_token = jwt.sign(JWTObj, process.env.JWT_KEY, {
+                        expiresIn: process.env.JWT_EXPIRED
+                    });
 
-            //if account is not exist or password is no correct(wait this before exit)
-            if (!result || !(await bcrypt.compare(Password, result[0].Password))) {
-                return res.status(401).render("login", { message: "Email or Password is incorrect." })
-                    //status 401 unauth
-            } else {
-                //JWT content
-                const id = result[0].Uid;
-                const JWTObj = { id, email };
-                const user_token = jwt.sign(JWTObj, process.env.JWT_KEY, {
-                    expiresIn: process.env.JWT_EXPIRED
-                });
-
-                //Setting cookie
-                const cookie_option = {
-                        expires: new Date( //Cookie expired date ms
-                            Date.now() + process.env.COOKIE_EXPIRED * 60 * 1000),
-                        httpOnly: true, //only http can read by webserver
-                        //secure  use https?
-                    }
-                    // set the cookie with JWT
-                res.cookie("UserJWT", user_token, cookie_option)
-                res.status(200).redirect("/")
-                    //status 200 back to homepage
+                    //Setting cookie
+                    const cookie_option = {
+                            expires: new Date( //Cookie expired date ms
+                                Date.now() + process.env.COOKIE_EXPIRED * 60 * 1000),
+                            httpOnly: true, //only http can read by webserver
+                            //secure  use https?
+                        }
+                        // set the cookie with JWT
+                    res.cookie("UserJWT", user_token, cookie_option)
+                    res.status(200).redirect("/")
+                        //status 200 back to homepage
+                }
             }
+            //if account is not exist or password is no correct(wait this before exit)
+            return res.status(401).render("login", { message: "Account not exist." })
         })
     } catch (error) {
         console.log(error);

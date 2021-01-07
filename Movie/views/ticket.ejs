@@ -190,13 +190,40 @@
                 req.send()
             }
         </script>
+        <script>
+            function check() {
+                var theater = document.getElementById("theater").value // get current theater
+                var movie = document.getElementById("movie").value // get selected movie
+                var move_date_list = document.getElementById("date_list").value
+                var move_time_list = document.getElementById("time_list").value
+
+
+                var test = "test"
+                var n1 = theater.localeCompare("defalut")
+                var n2 = movie.localeCompare("defalut")
+
+                var n3 = move_date_list.localeCompare("defalut")
+                var n4 = move_time_list.localeCompare("defalut")
+                console.log(typeof(n1))
+
+
+                if (n1 == 0 || n2 == 0 || n3 == 0 || n4 == 0) {
+                    alert("ticket form haven't finish")
+                    return false
+                } else {
+                    return true
+                }
+
+            }
+        </script>
+
+
 
         <div style="background-color:darkcyan;margin-left: 0% 10% 0% 10%">
             <div class="container-fluid " style="max-width: 80% ;padding: 100px;">
                 <form action="/ticket/viewShowTicket" method="GET">
                     <div class="form-group " style="padding-bottom: 5%;">
-
-                        <select class="form-control " id="theater" name="theater" onchange="getData()" required>
+                        <select class="form-control " id="theater" name="theater" onchange="getData()" required="required">
                            <option value="defalut" selected>Select a theater</option>
                         <% for(var i =0;i<theater_info.length;i++) { %>
                             <option value="<%= theater_info[i].Theater_id%> "><%= theater_info[i].Theater_name %></option>
@@ -204,22 +231,22 @@
                       </select>
                     </div>
                     <div class="form-group " style="padding-bottom: 5%;">
-                        <select class="form-control " id="movie" name="movie" onchange="getMovieDate()" required>
+                        <select class="form-control " id="movie" name="movie" onchange="getMovieDate()" required="required">
                             <option value="defalut" selected>Select a movie</option>
                       </select>
                     </div>
                     <div class="form-group " style="padding-bottom: 5%;">
-                        <select class="form-control " id="date_list" name="date" onchange="getMovieDateTime()" required>
+                        <select class="form-control " id="date_list" name="date" onchange="getMovieDateTime()" required="required">
                             <option value="defalut" selected>Select a date</option>
                       </select>
                     </div>
 
                     <div class="form-group " style="padding-bottom: 5%;">
-                        <select class="form-control " id="time_list" name="time" required>
+                        <select class="form-control " id="time_list" name="time" required="required">
                             <option value="defalut" selected>Select a time</option>
                       </select>
                     </div>
-                    <button class=" btn btn-primary btn-lg btn-block " type=" submit " style=" box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ; ">Get Ticket</button>
+                    <button class=" btn btn-primary btn-lg btn-block " type=" submit " onclick="return check()" style=" box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) ; ">Get Ticket</button>
                 </form>
             </div>
         </div>
