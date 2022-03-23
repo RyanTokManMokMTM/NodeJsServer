@@ -1,4 +1,4 @@
-# NodeJsServer
+# Movie Booking demo
 
 ### Installation
 1. Download Node.js Installer from this link
