@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*
  Navicat Premium Data Transfer
 
@@ -266,7 +266,7 @@ CREATE TABLE `user_ticket_record`  (
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
-=======
+
 /*
  Navicat Premium Data Transfer
 
@@ -466,4 +466,3 @@ CREATE TABLE `user_ticket_record`  (
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
->>>>>>> 984e8590f094d0a51e37c02b450568d14b91aeaa

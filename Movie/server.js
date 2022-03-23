@@ -27,6 +27,6 @@ server.use("/ticket/", require("./routes/viewticket"))
 server.use("/RefundTicket", require("./routes/user_ticke"))
 
 //Server setting
-server.listen(9001, () => {
-    console.log("Server listening on 127.0.0.1:9001...");
+server.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server listening on ${process.env.SERVER_HOST}:${process.env.SERVER_PORT}`);
 })

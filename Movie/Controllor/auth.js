@@ -15,6 +15,7 @@ db.getConnection((error) => {
     }
 });
 
+
 exports.register = async(req, res) => {
     const { Email, Password, ComfirmPassword, FirstName, LastName } = req.body;
     //res.json({ Email, Password, ComfirmPassword, FirstName, LastName }); //  db.query("INSERT INTO user_account(user_email,User_password) VALUE(?,?)", [email, password], (error, result) => {
